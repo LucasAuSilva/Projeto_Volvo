@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Projeto_Curso_Volvo.Models
+namespace Projeto_Curso_Volvo.Api.Models
 {
     public partial class Address
     {

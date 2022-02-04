@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Projeto_Curso_Volvo.Models
+namespace Projeto_Curso_Volvo.Api.Models
 {
     public partial class VolvoContext : DbContext
     {
