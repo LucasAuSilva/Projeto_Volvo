@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Projeto_Volvo.Mvc/1.0.0": {
+        "runtime": {
+          "Projeto_Volvo.Mvc.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Projeto_Volvo.Mvc/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
