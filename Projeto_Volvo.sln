@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projeto_Volvo.Api", "Projeto_Volvo.API\Projeto_Volvo.Api.csproj", "{7C6A9495-B790-42D1-902C-BC482F10DE5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projeto_Volvo.Mvc", "Projeto_Volvo.Mvc\Projeto_Volvo.Mvc.csproj", "{14C6E749-1012-4F83-9B78-4FA70665799E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projeto_Volvo.Test", "Projeto_Volvo.Test\Projeto_Volvo.Test.csproj", "{2C3A417C-8D8F-42C3-8578-09DE818AAC52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{7C6A9495-B790-42D1-902C-BC482F10DE5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C6A9495-B790-42D1-902C-BC482F10DE5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C6A9495-B790-42D1-902C-BC482F10DE5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14C6E749-1012-4F83-9B78-4FA70665799E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14C6E749-1012-4F83-9B78-4FA70665799E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14C6E749-1012-4F83-9B78-4FA70665799E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14C6E749-1012-4F83-9B78-4FA70665799E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C3A417C-8D8F-42C3-8578-09DE818AAC52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C3A417C-8D8F-42C3-8578-09DE818AAC52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C3A417C-8D8F-42C3-8578-09DE818AAC52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C3A417C-8D8F-42C3-8578-09DE818AAC52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
