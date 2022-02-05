@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Mordor\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj": {}
+    "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Mordor\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Mordor\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj": {
+    "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Mordor\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Mordor\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj",
+        "projectUniqueName": "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Mordor\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj",
         "projectName": "Projeto_Volvo.Mvc",
-        "projectPath": "c:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Mordor\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj",
+        "projectPath": "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Mordor\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj",
         "packagesPath": "C:\\Users\\Patchelli\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Mordor\\Projeto_Volvo\\Projeto_Volvo.Mvc\\obj\\",
+        "outputPath": "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Mordor\\Projeto_Volvo\\Projeto_Volvo.Mvc\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

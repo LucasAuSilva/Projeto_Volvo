@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ptV2L3yaDx8p2WhRXOkqth1/lVpkjY1gOd6R3TwmgCG6SU+XjESl1r7Z6nUIyyLA8nd63XWh6yPHwXPeutZ2GA==",
+  "dgSpecHash": "Cyr7Rg/rc7kBrZrWfCeg1dUAne4zzajWPhlxh/KlUMCiURry2bQW72PyhDjFce0yASgDraO+q9MvKtr1RJSizg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Mordor\\Projeto_Volvo\\Projeto_Volvo.Api\\Projeto_Volvo.Api.csproj",
+  "projectFilePath": "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Mordor\\Projeto_Volvo\\Projeto_Volvo.API\\Projeto_Volvo.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Patchelli\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Patchelli\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
