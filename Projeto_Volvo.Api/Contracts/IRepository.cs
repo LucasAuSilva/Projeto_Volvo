@@ -1,12 +1,12 @@
 
 namespace Projeto_Volvo.Api.Contracts
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : class
     {
-        ICollection<T> GetAllEntity();
-        T GetOneEntity(int id);
-        T AddEntity(T entity);
-        T UpdateEntity(int id, T entity);
-        void DeleteEntity(int id);
+        Task<ICollection<T>> GetAllEntity();
+        Task<T> GetOneEntity(int id);
+        Task<T> AddEntity(T entity);
+        Task<T> UpdateEntity(int id, T entity);
+        Task DeleteEntity(int id);
     }
 }
