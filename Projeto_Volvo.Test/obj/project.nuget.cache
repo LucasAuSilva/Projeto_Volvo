@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3E7IR+F1PTxUetDZUvN6W2PTnegU79g1/RFdkShOFd4dwPMIwKVBaOt1ovcnNc50+1JfG6Kll7Cs8n+zxvsoow==",
+  "dgSpecHash": "G48Y2cun5mWy5F4vRJHK5zdqGXKY8fZJyi1ySEZKYgPaUluwhooZtFzmyFXydWZuoxNGfakkCLrVWreMlDk1OA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Mordor\\Projeto_Volvo\\Projeto_Volvo.Test\\Projeto_Volvo.Test.csproj",
+  "projectFilePath": "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Lucas\\Projeto_Volvo\\Projeto_Volvo.Test\\Projeto_Volvo.Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Patchelli\\.nuget\\packages\\coverlet.collector\\3.1.0\\coverlet.collector.3.1.0.nupkg.sha512",
     "C:\\Users\\Patchelli\\.nuget\\packages\\microsoft.codecoverage\\16.11.0\\microsoft.codecoverage.16.11.0.nupkg.sha512",
