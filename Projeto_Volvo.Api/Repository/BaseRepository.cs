@@ -5,7 +5,7 @@ using Projeto_Volvo.Api.Exceptions;
 
 namespace Projeto_Volvo.Api.Repository
 {
-    public abstract class BaseRepository<T> : IDisposable, IRepository<T> where T : class
+    public abstract class BaseRepository<T> : IDisposable, IBaseRepository<T> where T : class
     {
         internal VolvoContext context;
         private bool disposed = false;
