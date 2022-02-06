@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Projeto_Volvo.Api.Contracts;
+using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
+using Projeto_Volvo.Api.Models.Dto;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -14,73 +17,67 @@ namespace Projeto_Volvo.Api.Controllers
     [ApiController]
     public class OwnersController : ControllerBase
     {
-        private readonly VolvoContext _context;
+        private readonly IOwnerRepository ownerRepository;
 
-        public OwnersController(VolvoContext context)
+        public OwnersController(IOwnerRepository ownerRepository)
         {
-            _context = context;
+            this.ownerRepository = ownerRepository;
         }
 
         // GET: api/Owners
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Owner>>> GetOwners()
+        public async Task<ActionResult<ICollection<Owner>>> GetOwners()
         {
-            return await _context.Owners.ToListAsync();
+            var owner = await ownerRepository.GetAllEntity();
+            return Ok(owner);
         }
 
         // GET: api/Owners/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Owner>> GetOwner(int id)
         {
-            var owner = await _context.Owners.FindAsync(id);
-
-            if (owner == null)
+            try
             {
-                return NotFound();
+                var owner = await ownerRepository.GetOneEntity(id);
+                return owner;
             }
-
-            return owner;
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // PUT: api/Owners/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOwner(int id, Owner owner)
+        public async Task<IActionResult> PutOwner(int id, [FromBody] OwnerDto owner)
         {
             if (id != owner.IdOwner)
             {
                 return BadRequest();
             }
 
-            _context.Entry(owner).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var updateOwner = await ownerRepository.UpdateEntity(id, owner.CreateEntity());
+                return Ok(updateOwner);
+            }
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OwnerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
-
-            return NoContent();
         }
 
         // POST: api/Owners
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Owner>> PostOwner(Owner owner)
+        public async Task<ActionResult<Owner>> PostOwner(OwnerDto ownerDto)
         {
-            _context.Owners.Add(owner);
-            await _context.SaveChangesAsync();
-
+            var owner = await ownerRepository.AddEntity(ownerDto.CreateEntity());
             return CreatedAtAction("GetOwner", new { id = owner.IdOwner }, owner);
         }
 
@@ -88,21 +85,15 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOwner(int id)
         {
-            var owner = await _context.Owners.FindAsync(id);
-            if (owner == null)
+            try
             {
-                return NotFound();
+                await ownerRepository.DeleteEntity(id);
+                return Ok();
             }
-
-            _context.Owners.Remove(owner);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool OwnerExists(int id)
-        {
-            return _context.Owners.Any(e => e.IdOwner == id);
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

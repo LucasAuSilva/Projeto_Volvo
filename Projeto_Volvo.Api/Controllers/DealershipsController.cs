@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Projeto_Volvo.Api.Contracts;
+using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
+using Projeto_Volvo.Api.Models.Dto;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -14,73 +17,67 @@ namespace Projeto_Volvo.Api.Controllers
     [ApiController]
     public class DealershipsController : ControllerBase
     {
-        private readonly VolvoContext _context;
+        private readonly IDealershipRepository dealershipRepository;
 
-        public DealershipsController(VolvoContext context)
+        public DealershipsController(IDealershipRepository dealershipRepository)
         {
-            _context = context;
+            this.dealershipRepository = dealershipRepository;
         }
 
         // GET: api/Dealerships
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Dealership>>> GetDealerships()
+        public async Task<ActionResult<ICollection<Dealership>>> GetDealerships()
         {
-            return await _context.Dealerships.ToListAsync();
+            var dealership = await dealershipRepository.GetAllEntity();
+            return Ok(dealership);
         }
 
         // GET: api/Dealerships/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Dealership>> GetDealership(int id)
         {
-            var dealership = await _context.Dealerships.FindAsync(id);
-
-            if (dealership == null)
+            try
             {
-                return NotFound();
+                var dealership = await dealershipRepository.GetOneEntity(id);
+                return dealership;
             }
-
-            return dealership;
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // PUT: api/Dealerships/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDealership(int id, Dealership dealership)
+        public async Task<IActionResult> PutDealership(int id, [FromBody] DealershipDto dealership)
         {
             if (id != dealership.IdDealership)
             {
                 return BadRequest();
             }
 
-            _context.Entry(dealership).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var updateDealership = await dealershipRepository.UpdateEntity(id, dealership.CreateEntity());
+                return Ok(updateDealership);
+            }
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DealershipExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
-
-            return NoContent();
         }
 
         // POST: api/Dealerships
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Dealership>> PostDealership(Dealership dealership)
+        public async Task<ActionResult<Dealership>> PostDealership(DealershipDto dealershipDto)
         {
-            _context.Dealerships.Add(dealership);
-            await _context.SaveChangesAsync();
-
+            var dealership = await dealershipRepository.AddEntity(dealershipDto.CreateEntity());
             return CreatedAtAction("GetDealership", new { id = dealership.IdDealership }, dealership);
         }
 
@@ -88,21 +85,15 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDealership(int id)
         {
-            var dealership = await _context.Dealerships.FindAsync(id);
-            if (dealership == null)
+            try
             {
-                return NotFound();
+                await dealershipRepository.DeleteEntity(id);
+                return Ok();
             }
-
-            _context.Dealerships.Remove(dealership);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool DealershipExists(int id)
-        {
-            return _context.Dealerships.Any(e => e.IdDealership == id);
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

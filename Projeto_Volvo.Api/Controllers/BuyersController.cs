@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Projeto_Volvo.Api.Contracts;
+using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
+using Projeto_Volvo.Api.Models.Dto;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -14,73 +17,67 @@ namespace Projeto_Volvo.Api.Controllers
     [ApiController]
     public class BuyersController : ControllerBase
     {
-        private readonly VolvoContext _context;
+        private readonly IBuyerRepository buyerRepository;
 
-        public BuyersController(VolvoContext context)
+        public BuyersController(IBuyerRepository buyerRepository)
         {
-            _context = context;
+            this.buyerRepository = buyerRepository;
         }
 
         // GET: api/Buyers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Buyer>>> GetBuyers()
+        public async Task<ActionResult<ICollection<Buyer>>> GetBuyers()
         {
-            return await _context.Buyers.ToListAsync();
+            var buyers = await buyerRepository.GetAllEntity();
+            return Ok(buyers);
         }
 
         // GET: api/Buyers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Buyer>> GetBuyer(int id)
         {
-            var buyer = await _context.Buyers.FindAsync(id);
-
-            if (buyer == null)
+            try
             {
-                return NotFound();
+                var buyer = await buyerRepository.GetOneEntity(id);
+                return buyer;
             }
-
-            return buyer;
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // PUT: api/Buyers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBuyer(int id, Buyer buyer)
+        public async Task<IActionResult> PutBuyer(int id, [FromBody] BuyerDto buyer)
         {
             if (id != buyer.IdBuyer)
             {
                 return BadRequest();
             }
 
-            _context.Entry(buyer).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var updateBuyer = await buyerRepository.UpdateEntity(id, buyer.CreateEntity());
+                return Ok(updateBuyer);
+            }
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BuyerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
-
-            return NoContent();
         }
 
         // POST: api/Buyers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Buyer>> PostBuyer(Buyer buyer)
+        public async Task<ActionResult<Buyer>> PostBuyer(BuyerDto buyerDto)
         {
-            _context.Buyers.Add(buyer);
-            await _context.SaveChangesAsync();
-
+            var buyer = await buyerRepository.AddEntity(buyerDto.CreateEntity());
             return CreatedAtAction("GetBuyer", new { id = buyer.IdBuyer }, buyer);
         }
 
@@ -88,21 +85,15 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBuyer(int id)
         {
-            var buyer = await _context.Buyers.FindAsync(id);
-            if (buyer == null)
+            try
             {
-                return NotFound();
+                await buyerRepository.DeleteEntity(id);
+                return Ok();
             }
-
-            _context.Buyers.Remove(buyer);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool BuyerExists(int id)
-        {
-            return _context.Buyers.Any(e => e.IdBuyer == id);
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

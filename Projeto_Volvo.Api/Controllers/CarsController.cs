@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Projeto_Volvo.Api.Contracts;
+using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
+using Projeto_Volvo.Api.Models.Dto;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -14,73 +17,67 @@ namespace Projeto_Volvo.Api.Controllers
     [ApiController]
     public class CarsController : ControllerBase
     {
-        private readonly VolvoContext _context;
+        private readonly ICarRepository carRepository;
 
-        public CarsController(VolvoContext context)
+        public CarsController(ICarRepository carRepository)
         {
-            _context = context;
+            this.carRepository = carRepository;
         }
 
         // GET: api/Cars
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Car>>> GetCars()
+        public async Task<ActionResult<ICollection<Car>>> GetCars()
         {
-            return await _context.Cars.ToListAsync();
+            var cars = await carRepository.GetAllEntity();
+            return Ok(cars);
         }
 
         // GET: api/Cars/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Car>> GetCar(int id)
         {
-            var car = await _context.Cars.FindAsync(id);
-
-            if (car == null)
+            try
             {
-                return NotFound();
+                var car = await carRepository.GetOneEntity(id);
+                return car;
             }
-
-            return car;
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // PUT: api/Cars/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCar(int id, Car car)
+        public async Task<IActionResult> PutCar(int id, [FromBody] CarDto car)
         {
             if (id != car.IdCar)
             {
                 return BadRequest();
             }
 
-            _context.Entry(car).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var updateCar = await carRepository.UpdateEntity(id, car.CreateEntity());
+                return Ok(updateCar);
+            }
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CarExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
-
-            return NoContent();
         }
 
         // POST: api/Cars
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Car>> PostCar(Car car)
+        public async Task<ActionResult<Car>> PostCar(CarDto carDto)
         {
-            _context.Cars.Add(car);
-            await _context.SaveChangesAsync();
-
+            var car = await carRepository.AddEntity(carDto.CreateEntity());
             return CreatedAtAction("GetCar", new { id = car.IdCar }, car);
         }
 
@@ -88,21 +85,15 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCar(int id)
         {
-            var car = await _context.Cars.FindAsync(id);
-            if (car == null)
+            try
             {
-                return NotFound();
+                await carRepository.DeleteEntity(id);
+                return Ok();
             }
-
-            _context.Cars.Remove(car);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool CarExists(int id)
-        {
-            return _context.Cars.Any(e => e.IdCar == id);
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

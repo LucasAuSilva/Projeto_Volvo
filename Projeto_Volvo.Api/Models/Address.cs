@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Projeto_Volvo.Api.Models
 {
@@ -29,9 +30,13 @@ namespace Projeto_Volvo.Api.Models
         [MaxLength(10)]
         public string? Cep { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Buyer> Buyers { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Dealership> Dealerships { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Owner> Owners { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Worker> Workers { get; set; }
     }
 }

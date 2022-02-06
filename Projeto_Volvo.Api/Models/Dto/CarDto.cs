@@ -4,6 +4,7 @@ namespace Projeto_Volvo.Api.Models.Dto
 {
     public class CarDto : IDto<Car>
     {
+        public int IdCar { get; set; }
         public int Kilometrage { get; set; }
         public int Year { get; set; }
         public string? NumberChassis { get; set; }

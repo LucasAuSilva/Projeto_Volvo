@@ -4,6 +4,7 @@ namespace Projeto_Volvo.Api.Models.Dto
 {
     public class WorkerDto : IDto<Worker>
     {
+        public int IdWorker { get; set; }
         public string? Name { get; set; }
         public float BaseSalary { get; set; }
         public string? Cpf { get; set; }
@@ -11,7 +12,7 @@ namespace Projeto_Volvo.Api.Models.Dto
         public int Level { get; set; }
         public virtual AddressDto? Address { get; set; }
         public virtual ContactDto? Contact { get; set; }
-        public virtual DealershipDto? DealershipDto { get; set; }
+        public virtual DealershipDto? Dealership { get; set; }
 
         public Worker CreateEntity()
         {
@@ -23,7 +24,7 @@ namespace Projeto_Volvo.Api.Models.Dto
                 Commission = this.Commission,
                 Level = this.Level,
                 Address = this.Address == null ? null : this.Address.CreateEntity(),
-                Dealership = this.DealershipDto == null ? null : this.DealershipDto.CreateEntity()
+                Dealership = this.Dealership == null ? null : this.Dealership.CreateEntity()
             };
         }
     }

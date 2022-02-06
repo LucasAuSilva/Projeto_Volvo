@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Projeto_Volvo.Api.Models
 {
@@ -22,6 +23,7 @@ namespace Projeto_Volvo.Api.Models
         public virtual Address? Address { get; set; }
         [ForeignKey("ContactId")]
         public virtual Contact? Contact { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Sale> Sales { get; set; }
     }
 }
