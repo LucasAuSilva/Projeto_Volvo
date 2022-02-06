@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Projeto_Curso_Volvo.Api.Models
+namespace Projeto_Volvo.Api.Models
 {
     public partial class VolvoContext : DbContext
     {
-        public VolvoContext(IConfiguration config)
-        {
-            _config = config;
-        }
-
         public VolvoContext(DbContextOptions<VolvoContext> options)
             : base(options)
         {
@@ -30,14 +25,5 @@ namespace Projeto_Curso_Volvo.Api.Models
         public virtual DbSet<Owner> Owners { get; set; } = null!;
         public virtual DbSet<Sale> Sales { get; set; } = null!;
         public virtual DbSet<Worker> Workers { get; set; } = null!;
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(_config.GetValue<string>("DbConnection"));
-            }
-        }
-
     }
 }

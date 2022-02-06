@@ -1,7 +1,7 @@
 
 namespace Projeto_Volvo.Api.Contracts
 {
-    public interface IRepository<T> where T : class
+    public interface IBaseRepository<T> where T : class
     {
         Task<ICollection<T>> GetAllEntity();
         Task<T> GetOneEntity(int id);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Projeto_Curso_Volvo.Api.Models
+namespace Projeto_Volvo.Api.Models
 {
     public partial class AcessoriesCategory
     {

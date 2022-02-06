@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Projeto_Curso_Volvo.Api.Models;
+using Projeto_Volvo.Api.Models;
 
 #nullable disable
 
-namespace Projeto_Curso_Volvo.Api.Migrations
+namespace Projeto_Volvo.Api.Migrations
 {
     [DbContext(typeof(VolvoContext))]
     [Migration("20220204220509_CreateDatabase")]
