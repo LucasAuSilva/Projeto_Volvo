@@ -78,6 +78,18 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Worker>> PostWorker(Worker worker)
         {
+
+            var newWorker = new Worker()
+            {
+                Name = worker.Name,
+                BaseSalary = worker.BaseSalary,
+                Cpf = worker.Cpf,
+                Commission = worker.Commission,
+                Level = worker.Level,
+                Address = worker.Address,
+                Contact = worker.Contact
+            };
+
             _context.Workers.Add(worker);
             await _context.SaveChangesAsync();
 
