@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Projeto_Volvo.Api.Models
 {
@@ -21,7 +22,9 @@ namespace Projeto_Volvo.Api.Models
         public string? Description { get; set; }
         [ForeignKey("CategoryId")]
         public virtual Category? Category { get; set; }
+        [JsonIgnore]
         public virtual ICollection<AcessoriesCategory> AcessoriesCategories { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Car> Cars { get; set; }
     }
 }

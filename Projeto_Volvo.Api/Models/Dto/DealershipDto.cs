@@ -4,6 +4,7 @@ namespace Projeto_Volvo.Api.Models.Dto
 {
     public class DealershipDto : IDto<Dealership>
     {
+        public int IdDealership { get; set; }
         public string? Name { get; set; }
         public string? Cnpj { get; set; }
         public virtual AddressDto? Address { get; set; }

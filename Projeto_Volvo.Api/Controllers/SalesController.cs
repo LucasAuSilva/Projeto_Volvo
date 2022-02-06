@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Projeto_Volvo.Api.Contracts;
+using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
+using Projeto_Volvo.Api.Models.Dto;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -14,95 +17,85 @@ namespace Projeto_Volvo.Api.Controllers
     [ApiController]
     public class SalesController : ControllerBase
     {
-        private readonly VolvoContext _context;
+        private readonly ISaleRepository saleRepository;
 
-        public SalesController(VolvoContext context)
+        public SalesController(ISaleRepository saleRepository)
         {
-            _context = context;
+            this.saleRepository = saleRepository;
         }
 
         // GET: api/Sales
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Sale>>> GetSales()
+        public async Task<ActionResult<ICollection<Sale>>> GetSales()
         {
-            return await _context.Sales.ToListAsync();
+            var sale = await saleRepository.GetAllEntity();
+            return Ok(sale);
         }
 
         // GET: api/Sales/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Sale>> GetSale(int id)
         {
-            var sale = await _context.Sales.FindAsync(id);
-
-            if (sale == null)
+            try
             {
-                return NotFound();
+                var sale = await saleRepository.GetOneEntity(id);
+                return sale;
             }
-
-            return sale;
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // PUT: api/Sales/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSale(int id, Sale sale)
-        {
-            if (id != sale.IdSale)
-            {
-                return BadRequest();
-            }
+        // TODO: Fazer update de venda
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> PutSale(int id, [FromBody] SaleDto sale)
+        // {
+        //     if (id != sale.IdSale)
+        //     {
+        //         return BadRequest();
+        //     }
 
-            _context.Entry(sale).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SaleExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
+        //     try
+        //     {
+        //         var updateSale = await saleRepository.UpdateEntity(id, sale.CreateEntity());
+        //         return Ok(updateSale);
+        //     }
+        //     catch (EntityException ex)
+        //     {
+        //         return NotFound(ex.Message);
+        //     }
+        //     catch (DbUpdateConcurrencyException)
+        //     {
+        //         throw;
+        //     }
+        // }
 
         // POST: api/Sales
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Sale>> PostSale(Sale sale)
-        {
-            _context.Sales.Add(sale);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetSale", new { id = sale.IdSale }, sale);
-        }
+        // TODO: Fazer metodo POST para criar venda.
+        // [HttpPost]
+        // public async Task<ActionResult<Sale>> PostSale(SaleDto saleDto)
+        // {
+        //     var sale = await saleRepository.AddEntity(saleDto.CreateEntity());
+        //     return CreatedAtAction("GetSale", new { id = sale.IdSale }, sale);
+        // }
 
         // DELETE: api/Sales/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSale(int id)
         {
-            var sale = await _context.Sales.FindAsync(id);
-            if (sale == null)
+            try
             {
-                return NotFound();
+                await saleRepository.DeleteEntity(id);
+                return Ok();
             }
-
-            _context.Sales.Remove(sale);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool SaleExists(int id)
-        {
-            return _context.Sales.Any(e => e.IdSale == id);
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

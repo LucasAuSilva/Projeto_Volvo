@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Projeto_Volvo.Api.Contracts;
+using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
+using Projeto_Volvo.Api.Models.Dto;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -14,73 +17,67 @@ namespace Projeto_Volvo.Api.Controllers
     [ApiController]
     public class WorkersController : ControllerBase
     {
-        private readonly VolvoContext _context;
+        private readonly IWorkerRepository workerRepository;
 
-        public WorkersController(VolvoContext context)
+        public WorkersController(IWorkerRepository workerRepository)
         {
-            _context = context;
+            this.workerRepository = workerRepository;
         }
 
         // GET: api/Workers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Worker>>> GetWorkers()
+        public async Task<ActionResult<ICollection<Worker>>> GetWorkers()
         {
-            return await _context.Workers.ToListAsync();
+            var worker = await workerRepository.GetAllEntity();
+            return Ok(worker);
         }
 
         // GET: api/Workers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Worker>> GetWorker(int id)
         {
-            var worker = await _context.Workers.FindAsync(id);
-
-            if (worker == null)
+            try
             {
-                return NotFound();
+                var worker = await workerRepository.GetOneEntity(id);
+                return worker;
             }
-
-            return worker;
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // PUT: api/Workers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutWorker(int id, Worker worker)
+        public async Task<IActionResult> PutWorker(int id, [FromBody] WorkerDto worker)
         {
             if (id != worker.IdWorker)
             {
                 return BadRequest();
             }
 
-            _context.Entry(worker).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var updateWorker = await workerRepository.UpdateEntity(id, worker.CreateEntity());
+                return Ok(updateWorker);
+            }
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!WorkerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
-
-            return NoContent();
         }
 
         // POST: api/Workers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Worker>> PostWorker(Worker worker)
+        public async Task<ActionResult<Worker>> PostWorker(WorkerDto workerDto)
         {
-            _context.Workers.Add(worker);
-            await _context.SaveChangesAsync();
-
+            var worker = await workerRepository.AddEntity(workerDto.CreateEntity());
             return CreatedAtAction("GetWorker", new { id = worker.IdWorker }, worker);
         }
 
@@ -88,21 +85,15 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWorker(int id)
         {
-            var worker = await _context.Workers.FindAsync(id);
-            if (worker == null)
+            try
             {
-                return NotFound();
+                await workerRepository.DeleteEntity(id);
+                return Ok();
             }
-
-            _context.Workers.Remove(worker);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool WorkerExists(int id)
-        {
-            return _context.Workers.Any(e => e.IdWorker == id);
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

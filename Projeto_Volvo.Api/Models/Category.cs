@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Projeto_Volvo.Api.Models
 {
@@ -17,7 +18,9 @@ namespace Projeto_Volvo.Api.Models
         [MaxLength(80)]
         public string? Name { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Acessory> Acessories { get; set; }
+        [JsonIgnore]
         public virtual ICollection<AcessoriesCategory> AcessoriesCategories { get; set; }
     }
 }
