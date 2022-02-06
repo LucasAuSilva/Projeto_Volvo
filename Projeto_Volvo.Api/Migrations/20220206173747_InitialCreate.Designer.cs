@@ -12,8 +12,8 @@ using Projeto_Volvo.Api.Models;
 namespace Projeto_Volvo.Api.Migrations
 {
     [DbContext(typeof(VolvoContext))]
-    [Migration("20220204220509_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20220206173747_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace Projeto_Volvo.Api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.AcessoriesCategory", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.AcessoriesCategory", b =>
                 {
                     b.Property<int>("IdAcessoriesCategory")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace Projeto_Volvo.Api.Migrations
                     b.ToTable("AcessoriesCategories");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Acessory", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Acessory", b =>
                 {
                     b.Property<int>("IdAcessory")
                         .ValueGeneratedOnAdd()
@@ -73,7 +73,7 @@ namespace Projeto_Volvo.Api.Migrations
                     b.ToTable("Acessories");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Address", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Address", b =>
                 {
                     b.Property<int>("IdAddress")
                         .ValueGeneratedOnAdd()
@@ -112,7 +112,7 @@ namespace Projeto_Volvo.Api.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Buyer", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Buyer", b =>
                 {
                     b.Property<int>("IdBuyer")
                         .ValueGeneratedOnAdd()
@@ -143,7 +143,7 @@ namespace Projeto_Volvo.Api.Migrations
                     b.ToTable("Buyers");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Car", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Car", b =>
                 {
                     b.Property<int>("IdCar")
                         .ValueGeneratedOnAdd()
@@ -186,7 +186,7 @@ namespace Projeto_Volvo.Api.Migrations
                     b.ToTable("Cars");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Category", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Category", b =>
                 {
                     b.Property<int>("IdCategory")
                         .ValueGeneratedOnAdd()
@@ -203,7 +203,7 @@ namespace Projeto_Volvo.Api.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Contact", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Contact", b =>
                 {
                     b.Property<int>("IdContact")
                         .ValueGeneratedOnAdd()
@@ -228,7 +228,7 @@ namespace Projeto_Volvo.Api.Migrations
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Dealership", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Dealership", b =>
                 {
                     b.Property<int>("IdDealership")
                         .ValueGeneratedOnAdd()
@@ -259,7 +259,7 @@ namespace Projeto_Volvo.Api.Migrations
                     b.ToTable("Dealerships");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Owner", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Owner", b =>
                 {
                     b.Property<int>("IdOwner")
                         .ValueGeneratedOnAdd()
@@ -294,7 +294,7 @@ namespace Projeto_Volvo.Api.Migrations
                     b.ToTable("Owners");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Sale", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Sale", b =>
                 {
                     b.Property<int>("IdSale")
                         .ValueGeneratedOnAdd()
@@ -333,7 +333,7 @@ namespace Projeto_Volvo.Api.Migrations
                     b.ToTable("Sales");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Worker", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Worker", b =>
                 {
                     b.Property<int>("IdWorker")
                         .ValueGeneratedOnAdd()
@@ -378,13 +378,13 @@ namespace Projeto_Volvo.Api.Migrations
                     b.ToTable("Workers");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.AcessoriesCategory", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.AcessoriesCategory", b =>
                 {
-                    b.HasOne("Projeto_Curso_Volvo.Models.Acessory", "Acessorie")
+                    b.HasOne("Projeto_Volvo.Api.Models.Acessory", "Acessorie")
                         .WithMany("AcessoriesCategories")
                         .HasForeignKey("AcessoryId");
 
-                    b.HasOne("Projeto_Curso_Volvo.Models.Category", "Category")
+                    b.HasOne("Projeto_Volvo.Api.Models.Category", "Category")
                         .WithMany("AcessoriesCategories")
                         .HasForeignKey("CategoryId");
 
@@ -393,22 +393,22 @@ namespace Projeto_Volvo.Api.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Acessory", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Acessory", b =>
                 {
-                    b.HasOne("Projeto_Curso_Volvo.Models.Category", "Category")
+                    b.HasOne("Projeto_Volvo.Api.Models.Category", "Category")
                         .WithMany("Acessories")
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Buyer", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Buyer", b =>
                 {
-                    b.HasOne("Projeto_Curso_Volvo.Models.Address", "Address")
+                    b.HasOne("Projeto_Volvo.Api.Models.Address", "Address")
                         .WithMany("Buyers")
                         .HasForeignKey("AddressId");
 
-                    b.HasOne("Projeto_Curso_Volvo.Models.Contact", "Contact")
+                    b.HasOne("Projeto_Volvo.Api.Models.Contact", "Contact")
                         .WithMany("Buyers")
                         .HasForeignKey("ContactId");
 
@@ -417,22 +417,22 @@ namespace Projeto_Volvo.Api.Migrations
                     b.Navigation("Contact");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Car", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Car", b =>
                 {
-                    b.HasOne("Projeto_Curso_Volvo.Models.Acessory", "Acessorie")
+                    b.HasOne("Projeto_Volvo.Api.Models.Acessory", "Acessorie")
                         .WithMany("Cars")
                         .HasForeignKey("AcessoryId");
 
                     b.Navigation("Acessorie");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Dealership", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Dealership", b =>
                 {
-                    b.HasOne("Projeto_Curso_Volvo.Models.Address", "Address")
+                    b.HasOne("Projeto_Volvo.Api.Models.Address", "Address")
                         .WithMany("Dealerships")
                         .HasForeignKey("AddressId");
 
-                    b.HasOne("Projeto_Curso_Volvo.Models.Contact", "Contact")
+                    b.HasOne("Projeto_Volvo.Api.Models.Contact", "Contact")
                         .WithMany("Dealerships")
                         .HasForeignKey("ContactId");
 
@@ -441,13 +441,13 @@ namespace Projeto_Volvo.Api.Migrations
                     b.Navigation("Contact");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Owner", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Owner", b =>
                 {
-                    b.HasOne("Projeto_Curso_Volvo.Models.Address", "Address")
+                    b.HasOne("Projeto_Volvo.Api.Models.Address", "Address")
                         .WithMany("Owners")
                         .HasForeignKey("AddressId");
 
-                    b.HasOne("Projeto_Curso_Volvo.Models.Contact", "Contact")
+                    b.HasOne("Projeto_Volvo.Api.Models.Contact", "Contact")
                         .WithMany("Owners")
                         .HasForeignKey("ContactId");
 
@@ -456,21 +456,21 @@ namespace Projeto_Volvo.Api.Migrations
                     b.Navigation("Contact");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Sale", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Sale", b =>
                 {
-                    b.HasOne("Projeto_Curso_Volvo.Models.Buyer", "Buyer")
+                    b.HasOne("Projeto_Volvo.Api.Models.Buyer", "Buyer")
                         .WithMany("Sales")
                         .HasForeignKey("BuyerId");
 
-                    b.HasOne("Projeto_Curso_Volvo.Models.Car", "Car")
+                    b.HasOne("Projeto_Volvo.Api.Models.Car", "Car")
                         .WithMany("Sales")
                         .HasForeignKey("CarId");
 
-                    b.HasOne("Projeto_Curso_Volvo.Models.Dealership", "Dealership")
+                    b.HasOne("Projeto_Volvo.Api.Models.Dealership", "Dealership")
                         .WithMany("Sales")
                         .HasForeignKey("DealershipId");
 
-                    b.HasOne("Projeto_Curso_Volvo.Models.Worker", "Worker")
+                    b.HasOne("Projeto_Volvo.Api.Models.Worker", "Worker")
                         .WithMany("Sales")
                         .HasForeignKey("WorkerId");
 
@@ -483,17 +483,17 @@ namespace Projeto_Volvo.Api.Migrations
                     b.Navigation("Worker");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Worker", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Worker", b =>
                 {
-                    b.HasOne("Projeto_Curso_Volvo.Models.Address", "Address")
+                    b.HasOne("Projeto_Volvo.Api.Models.Address", "Address")
                         .WithMany("Workers")
                         .HasForeignKey("AddressId");
 
-                    b.HasOne("Projeto_Curso_Volvo.Models.Contact", "Contact")
+                    b.HasOne("Projeto_Volvo.Api.Models.Contact", "Contact")
                         .WithMany("Workers")
                         .HasForeignKey("ContactId");
 
-                    b.HasOne("Projeto_Curso_Volvo.Models.Dealership", "Dealership")
+                    b.HasOne("Projeto_Volvo.Api.Models.Dealership", "Dealership")
                         .WithMany("Workers")
                         .HasForeignKey("DealershipId");
 
@@ -504,14 +504,14 @@ namespace Projeto_Volvo.Api.Migrations
                     b.Navigation("Dealership");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Acessory", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Acessory", b =>
                 {
                     b.Navigation("AcessoriesCategories");
 
                     b.Navigation("Cars");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Address", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Address", b =>
                 {
                     b.Navigation("Buyers");
 
@@ -522,24 +522,24 @@ namespace Projeto_Volvo.Api.Migrations
                     b.Navigation("Workers");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Buyer", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Buyer", b =>
                 {
                     b.Navigation("Sales");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Car", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Car", b =>
                 {
                     b.Navigation("Sales");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Category", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Category", b =>
                 {
                     b.Navigation("Acessories");
 
                     b.Navigation("AcessoriesCategories");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Contact", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Contact", b =>
                 {
                     b.Navigation("Buyers");
 
@@ -550,14 +550,14 @@ namespace Projeto_Volvo.Api.Migrations
                     b.Navigation("Workers");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Dealership", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Dealership", b =>
                 {
                     b.Navigation("Sales");
 
                     b.Navigation("Workers");
                 });
 
-            modelBuilder.Entity("Projeto_Curso_Volvo.Models.Worker", b =>
+            modelBuilder.Entity("Projeto_Volvo.Api.Models.Worker", b =>
                 {
                     b.Navigation("Sales");
                 });
