@@ -23,7 +23,8 @@ namespace Projeto_Volvo.Api.Models.Dto
                 Color = this.Color,
                 Price = this.Price,
                 Model = this.Model,
-                VersionSystem = this.VersionSystem
+                VersionSystem = this.VersionSystem,
+                Owner = this.Owner.CreateEntity()
             };
         }
     }
