@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Projeto_Curso_Volvo.Api.Models
+namespace Projeto_Volvo.Api.Models
 {
     public partial class Contact
     {

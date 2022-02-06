@@ -1,7 +1,6 @@
 
 using Microsoft.AspNetCore.Mvc;
-using Projeto_Curso_Volvo.Api.Models;
-using Projeto_Volvo.Api.Repository;
+using Projeto_Volvo.Api.Contracts;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -9,9 +8,9 @@ namespace Projeto_Volvo.Api.Controllers
     [Route("[controller]")]
     public class CarController : ControllerBase
     {
-        private readonly CarRepository carRepository;
+        private readonly ICarRepository carRepository;
 
-        public CarController(CarRepository carRepository)
+        public CarController(ICarRepository carRepository)
         {
             this.carRepository = carRepository;
         }

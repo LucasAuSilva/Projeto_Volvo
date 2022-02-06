@@ -2,7 +2,7 @@ using Projeto_Volvo.Api.Models;
 
 namespace Projeto_Volvo.Api.Contracts
 {
-    public interface ICarRepository : IBaseRepository<Car>
+    public interface IOwnerRepository : IBaseRepository<Owner>
     {
 
     }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Projeto_Curso_Volvo.Api.Migrations
+namespace Projeto_Volvo.Api.Migrations
 {
     public partial class CreateDatabase : Migration
     {
