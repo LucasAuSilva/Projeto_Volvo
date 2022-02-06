@@ -7,10 +7,10 @@ namespace Projeto_Volvo.Api.Repository
 {
     public class AddressRepository : IAddressRepository
     {
-        protected VolvoContext context;
+        private VolvoContext context;
         private bool disposed = false;
 
-        protected AddressRepository(VolvoContext context)
+        public AddressRepository(VolvoContext context)
         {
             this.context = context;
         }

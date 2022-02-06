@@ -7,10 +7,10 @@ namespace Projeto_Volvo.Api.Repository
 {
     public class DealershipRepository : IDealershipRepository
     {
-        protected VolvoContext context;
+        private VolvoContext context;
         private bool disposed = false;
 
-        protected DealershipRepository(VolvoContext context)
+        public DealershipRepository(VolvoContext context)
         {
             this.context = context;
         }

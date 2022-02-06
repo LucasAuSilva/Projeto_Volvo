@@ -7,10 +7,10 @@ namespace Projeto_Volvo.Api.Repository
 {
     public class BuyerRepository : IBuyerRepository
     {
-        protected VolvoContext context;
+        private VolvoContext context;
         private bool disposed = false;
 
-        protected BuyerRepository(VolvoContext context)
+        public BuyerRepository(VolvoContext context)
         {
             this.context = context;
         }

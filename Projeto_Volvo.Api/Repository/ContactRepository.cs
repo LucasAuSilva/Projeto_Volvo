@@ -7,10 +7,10 @@ namespace Projeto_Volvo.Api.Repository
 {
     public class ContactRepository : IContactRepository
     {
-        protected VolvoContext context;
+        private VolvoContext context;
         private bool disposed = false;
 
-        protected ContactRepository(VolvoContext context)
+        public ContactRepository(VolvoContext context)
         {
             this.context = context;
         }

@@ -26,7 +26,6 @@ builder.Services.AddScoped<IOwnerRepository, OwnerRepository>();
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
 
-
 builder.Services.AddDbContext<VolvoContext>(c => c.UseSqlServer(connection));
 
 var app = builder.Build();

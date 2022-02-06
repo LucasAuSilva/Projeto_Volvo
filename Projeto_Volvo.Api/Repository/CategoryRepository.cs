@@ -7,10 +7,10 @@ namespace Projeto_Volvo.Api.Repository
 {
     public class CategoryRepository : ICategoryRepository
     {
-        protected VolvoContext context;
+        private VolvoContext context;
         private bool disposed = false;
 
-        protected CategoryRepository(VolvoContext context)
+        public CategoryRepository(VolvoContext context)
         {
             this.context = context;
         }
