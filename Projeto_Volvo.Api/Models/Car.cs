@@ -25,6 +25,8 @@ namespace Projeto_Volvo.Api.Models
         public string? Model { get; set; }
         [MaxLength(20)]
         public string? VersionSystem { get; set; }
+        [ForeignKey("OwnerId")]
+        public virtual Owner? Owner { get; set; }
 
         [ForeignKey("AcessoryId")]
         public virtual Acessory? Acessorie { get; set; }
