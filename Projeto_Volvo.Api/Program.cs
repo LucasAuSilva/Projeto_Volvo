@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Projeto_Volvo.Api.Models;
 using Projeto_Volvo.Api.Contracts;
 using Projeto_Volvo.Api.Repository;
+using Microsoft.AspNetCore.Builder;
+using Projeto_Volvo.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +31,8 @@ builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
 builder.Services.AddDbContext<VolvoContext>(c => c.UseSqlServer(connection));
 
 var app = builder.Build();
+
+app.UseMiddleware(typeof(ErrorMiddleware));
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
