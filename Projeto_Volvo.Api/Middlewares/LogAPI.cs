@@ -10,7 +10,6 @@ namespace Projeto_Volvo.Api.Middlewares
         {
             String srtPath = Environment.CurrentDirectory + "\\Log";
             m_exePath = Path.GetFullPath(srtPath);
-            //m_exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
             if (!File.Exists(m_exePath + "\\" + "log.txt"))
                 File.Create(m_exePath + "\\" + "log.txt");
