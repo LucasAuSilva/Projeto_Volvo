@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Projeto_Volvo.Api.Models;
 using Projeto_Volvo.Api.Contracts;
 using Projeto_Volvo.Api.Exceptions;
+using Projeto_Volvo.Api.Middlewares;
 
 namespace Projeto_Volvo.Api.Repository
 {
@@ -30,7 +31,7 @@ namespace Projeto_Volvo.Api.Repository
                 context.Set<Address>().Remove(entity);
                 await context.SaveChangesAsync();
             }
-
+            
             throw new EntityException("Entidade não encontrada.");
         }
 

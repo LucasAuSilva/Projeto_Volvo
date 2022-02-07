@@ -2,11 +2,11 @@
 
 namespace Projeto_Volvo.Api.Middlewares
 {
-    public class LogAPi
+    public class LogAPI
     {
         private static string m_exePath = string.Empty;
 
-        public static void RegistraLog(string logMessage,string Loglogref,string hashTraceId)
+        public static void RegisterLog(string logMessage,string Loglogref,string hashTraceId)
         {
             String srtPath = Environment.CurrentDirectory + "\\Log";
             m_exePath = Path.GetFullPath(srtPath);

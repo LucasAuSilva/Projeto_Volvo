@@ -25,9 +25,9 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Address>>> GetAddresses()
         {
+            throw new Exception("Não encontrado");
             return await _context.Addresses.ToListAsync();
 
-            throw new Exception("Não encontrado");
         }
 
         // GET: api/Addresses/5

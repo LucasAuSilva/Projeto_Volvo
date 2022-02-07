@@ -46,7 +46,7 @@ namespace Projeto_Volvo.Api.Middlewares
             }
 
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            LogAPi.RegistraLog(ex.Message, errorResponseVm.Errors[0].Logref, errorResponseVm.TraceId); ;
+            LogAPI.RegisterLog(ex.Message, errorResponseVm.Errors[0].Logref, errorResponseVm.TraceId); ;
             var result = JsonConvert.SerializeObject(errorResponseVm);
             context.Response.ContentType = "application/json";
             return context.Response.WriteAsync(result);
