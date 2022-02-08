@@ -32,10 +32,5 @@ namespace Projeto_Volvo.Api.Service
 
             return worker;
         }
-
-        public async Task<Worker> UpdateWorker(WorkerDto worker)
-        {
-
-        }
     }
 }

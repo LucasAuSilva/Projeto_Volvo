@@ -18,6 +18,7 @@ namespace Projeto_Volvo.Api.Models.Dto
         {
             return new Worker()
             {
+                IdWorker = this.IdWorker,
                 Name = this.Name,
                 BaseSalary = this.BaseSalary,
                 Cpf = this.Cpf,
