@@ -24,6 +24,7 @@ namespace Projeto_Volvo.Api.Models.Dto
                 Commission = this.Commission,
                 Level = this.Level,
                 Address = this.Address == null ? null : this.Address.CreateEntity(),
+                Contact = this.Contact == null ? null : this.Contact.CreateEntity(),
                 Dealership = this.Dealership == null ? null : this.Dealership.CreateEntity()
             };
         }
