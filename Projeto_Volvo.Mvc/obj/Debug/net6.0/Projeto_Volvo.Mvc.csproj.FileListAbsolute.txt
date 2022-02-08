@@ -59,6 +59,7 @@ C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Mvc\bi
 C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Mvc\bin\Debug\net6.0\Projeto_Volvo.Mvc.dll
 C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Mvc\bin\Debug\net6.0\ref\Projeto_Volvo.Mvc.dll
 C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Mvc\bin\Debug\net6.0\Projeto_Volvo.Mvc.pdb
+C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Mvc\obj\Debug\net6.0\Projeto_Volvo.Mvc.csproj.AssemblyReference.cache
 C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Mvc\obj\Debug\net6.0\Projeto_Volvo.Mvc.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Mvc\obj\Debug\net6.0\Projeto_Volvo.Mvc.AssemblyInfoInputs.cache
 C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Mvc\obj\Debug\net6.0\Projeto_Volvo.Mvc.AssemblyInfo.cs
