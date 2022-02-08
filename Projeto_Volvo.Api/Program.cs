@@ -4,6 +4,7 @@ using Projeto_Volvo.Api.Contracts;
 using Projeto_Volvo.Api.Repository;
 using Microsoft.AspNetCore.Builder;
 using Projeto_Volvo.Api.Middlewares;
+using Projeto_Volvo.Api.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var connection = builder.Configuration["DbConnection"];
 
-// TODO: AChar um jeito melhor de fazer isso.
+// TODO: Achar um jeito melhor de fazer isso.
+// Repositorios da aplicacao.
 builder.Services.AddScoped<IAcessoriesCategoryRepository, AcessoriesCategoryRepository>();
 builder.Services.AddScoped<IAcessoryRepository, AcessoryRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
@@ -27,6 +29,9 @@ builder.Services.AddScoped<IDealershipRepository, DealershipRepository>();
 builder.Services.AddScoped<IOwnerRepository, OwnerRepository>();
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
+
+// Services da aplicacao
+builder.Services.AddScoped<IWorkerService, WorkerService>();
 
 builder.Services.AddDbContext<VolvoContext>(c => c.UseSqlServer(connection));
 
