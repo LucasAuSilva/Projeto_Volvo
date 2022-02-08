@@ -36,8 +36,9 @@ namespace Projeto_Volvo.Api.Controllers
                 var worker = await workerRepository.GetOneEntity(id);
                 return worker;
             }
-            catch (EntityException ex)
+            catch (Exception ex)
             {
+                throw new Exception("Entidade não encontrada.");
                 return NotFound(ex.Message);
             }
         }
