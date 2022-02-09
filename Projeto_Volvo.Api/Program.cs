@@ -32,6 +32,8 @@ builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
 
 // Services da aplicacao
 builder.Services.AddScoped<IWorkerService, WorkerService>();
+builder.Services.AddScoped<IBuyerService, BuyerService>();
+builder.Services.AddScoped<ISaleService, SaleService>();
 
 builder.Services.AddDbContext<VolvoContext>(c => c.UseSqlServer(connection));
 

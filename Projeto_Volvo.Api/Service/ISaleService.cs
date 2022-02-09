@@ -6,10 +6,7 @@ namespace Projeto_Volvo.Api.Service
 {
     public interface ISaleService
     {
-        Task<Sale> CreateSale(IBuyerRepository buyerRepo,
-            IDealershipRepository dealershipRepo,
-            IWorkerRepository workerRepo,
-            ICarRepository carRepo,
+        Task<Sale> CreateSale(
             SaleDto dto);
     }
 }

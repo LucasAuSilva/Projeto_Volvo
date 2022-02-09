@@ -6,12 +6,22 @@ namespace Projeto_Volvo.Api.Service
 {
     public class WorkerService : IWorkerService
     {
-        public async Task<Worker> CreateWorker(
+        private readonly IAddressRepository addressRepo;
+        private readonly IContactRepository contactRepo;
+        private readonly IDealershipRepository dealershipRepo;
+
+        public WorkerService(
             IAddressRepository addressRepo,
             IContactRepository contactRepo,
-            IDealershipRepository dealershipRepo,
-            WorkerDto dto
+            IDealershipRepository dealershipRepo
         )
+        {
+            this.addressRepo = addressRepo;
+            this.contactRepo = contactRepo;
+            this.dealershipRepo = dealershipRepo;
+        }
+
+        public async Task<Worker> CreateWorker(WorkerDto dto)
         {
             var worker = dto.CreateEntity();
             if (dto.Dealership != null && dto.Dealership.IdDealership != null)

@@ -7,11 +7,25 @@ namespace Projeto_Volvo.Api.Service
 {
     public class SaleService : ISaleService
     {
-        public async Task<Sale> CreateSale(
-            IBuyerRepository buyerRepo,
+        private readonly IDealershipRepository dealershipRepo;
+        private readonly IWorkerRepository workerRepo;
+        private readonly ICarRepository carRepo;
+        private IBuyerRepository buyerRepo;
+
+        public SaleService(
             IDealershipRepository dealershipRepo,
             IWorkerRepository workerRepo,
             ICarRepository carRepo,
+            IBuyerRepository buyerRepo
+        )
+        {
+            this.dealershipRepo = dealershipRepo;
+            this.workerRepo = workerRepo;
+            this.carRepo = carRepo;
+            this.buyerRepo = buyerRepo;
+        }
+
+        public async Task<Sale> CreateSale(
             SaleDto dto
             )
         {

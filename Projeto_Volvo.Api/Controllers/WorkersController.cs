@@ -10,6 +10,7 @@ using Projeto_Volvo.Api.Contracts;
 using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
 using Projeto_Volvo.Api.Models.Dto;
+using Projeto_Volvo.Api.Service;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -18,10 +19,12 @@ namespace Projeto_Volvo.Api.Controllers
     public class WorkersController : ControllerBase
     {
         private readonly IWorkerRepository workerRepository;
+        private readonly IWorkerService workerService;
 
-        public WorkersController(IWorkerRepository workerRepository)
+        public WorkersController(IWorkerRepository workerRepository, IWorkerService workerService)
         {
             this.workerRepository = workerRepository;
+            this.workerService = workerService;
         }
 
         // GET: api/Workers
@@ -77,7 +80,8 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Worker>> PostWorker(WorkerDto workerDto)
         {
-            var worker = await workerRepository.AddEntity(workerDto.CreateEntity());
+            var newWorker = await workerService.CreateWorker(workerDto);
+            var worker = await workerRepository.AddEntity(newWorker);
             return CreatedAtAction("GetWorker", new { id = worker.IdWorker }, worker);
         }
 

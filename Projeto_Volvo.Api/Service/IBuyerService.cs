@@ -1,12 +1,11 @@
-
 using Projeto_Volvo.Api.Contracts;
 using Projeto_Volvo.Api.Models;
 using Projeto_Volvo.Api.Models.Dto;
 
 namespace Projeto_Volvo.Api.Service
 {
-    public interface IWorkerService
+    public interface IBuyerService
     {
-        Task<Worker> CreateWorker(WorkerDto dto);
+        Task<Buyer> CreateBuyer(BuyerDto dto);
     }
 }
