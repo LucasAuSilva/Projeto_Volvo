@@ -18,7 +18,6 @@ var connection = builder.Configuration["DbConnection"];
 
 // TODO: Achar um jeito melhor de fazer isso.
 // Repositorios da aplicacao.
-builder.Services.AddScoped<IAcessoriesCategoryRepository, AcessoriesCategoryRepository>();
 builder.Services.AddScoped<IAcessoryRepository, AcessoryRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IBuyerRepository, BuyerRepository>();

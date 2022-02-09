@@ -17,15 +17,21 @@ namespace Projeto_Volvo.Api.Service
         public async Task<Acessory> CreateAcessory(AcessoryDto dto)
         {
             var acessory = dto.CreateEntity();
-
-            if (dto.Category == null)
+            if (dto.Categories == null)
             {
-                throw new EntityException("Categoria não pode ser vazio", 400);
+                throw new EntityException("Acessorio não pode ser criado sem uma categoria.", 400);
             }
-            else if (dto.Category.IdCategory.HasValue)
+            foreach (var category in dto.Categories)
             {
-                var category = await categoryRepo.GetOneEntity((int)dto.Category.IdCategory);
-                acessory.Category = category;
+                if (category.IdCategory.HasValue)
+                {
+                    var findCategory = await categoryRepo.GetOneEntity((int)category.IdCategory);
+                    acessory.Categories.Add(findCategory);
+                }
+                else
+                {
+                    acessory.Categories.Add(category.CreateEntity());
+                }
             }
 
             return acessory;

@@ -10,7 +10,7 @@ namespace Projeto_Volvo.Api.Models
     {
         public Acessory()
         {
-            AcessoriesCategories = new HashSet<AcessoriesCategory>();
+            Categories = new HashSet<Category>();
             Cars = new HashSet<Car>();
         }
 
@@ -20,10 +20,8 @@ namespace Projeto_Volvo.Api.Models
         public string? Name { get; set; }
         [MaxLength(100)]
         public string? Description { get; set; }
-        [ForeignKey("CategoryId")]
-        public virtual Category? Category { get; set; }
         [JsonIgnore]
-        public virtual ICollection<AcessoriesCategory> AcessoriesCategories { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
         [JsonIgnore]
         public virtual ICollection<Car> Cars { get; set; }
     }

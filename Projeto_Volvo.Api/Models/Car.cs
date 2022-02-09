@@ -28,9 +28,8 @@ namespace Projeto_Volvo.Api.Models
         public string? VersionSystem { get; set; }
         [ForeignKey("OwnerId")]
         public virtual Owner? Owner { get; set; }
-
-        [ForeignKey("AcessoryId")]
-        public virtual Acessory? Acessorie { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Acessory>? Acessories { get; set; }
         [JsonIgnore]
         public virtual ICollection<Sale> Sales { get; set; }
     }
