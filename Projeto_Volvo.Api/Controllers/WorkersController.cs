@@ -45,6 +45,14 @@ namespace Projeto_Volvo.Api.Controllers
             }
         }
 
+        // GET: api/Workers/salary/5
+        public async Task<IActionResult> GetSalaryOnMonth(int id, [FromBody] DateDto dateDto)
+        {
+            var worker = await workerRepository.GetOneEntity(id);
+            var sales = await workerRepository.GetSalesOnMonth(id, dateDto.CreateEntity());
+            return Ok(workerService.CreateSalary(sales, worker));
+        }
+
         // PUT: api/Workers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

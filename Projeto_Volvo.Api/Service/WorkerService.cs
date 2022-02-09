@@ -42,5 +42,17 @@ namespace Projeto_Volvo.Api.Service
 
             return worker;
         }
+
+        public SalaryDto CreateSalary(ICollection<Sale> sales, Worker worker)
+        {
+            var salary = worker.BaseSalary;
+            foreach (var sale in sales)
+            {
+                var value = sale.SaleValue * worker.Commission;
+                salary += value;
+            }
+
+            return new SalaryDto(salary, sales);
+        }
     }
 }

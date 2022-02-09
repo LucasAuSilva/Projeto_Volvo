@@ -7,6 +7,7 @@ namespace Projeto_Volvo.Api.Service
 {
     public interface IWorkerService
     {
+        SalaryDto CreateSalary(ICollection<Sale> sales, Worker worker);
         Task<Worker> CreateWorker(WorkerDto dto);
     }
 }
