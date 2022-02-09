@@ -13,6 +13,7 @@ namespace Projeto_Volvo.Api.Models.Dto
         public string? Model { get; set; }
         public string? VersionSystem { get; set; }
         public OwnerDto? Owner { get; set; }
+        public ICollection<AcessoryDto> Acessories { get; set; }
 
         public Car CreateEntity()
         {
@@ -21,7 +22,7 @@ namespace Projeto_Volvo.Api.Models.Dto
                 Kilometrage = this.Kilometrage,
                 Year = this.Year,
                 NumberChassis = this.NumberChassis,
-                Color = this.Color,
+                Color = this.Color != null ? this.Color.ToLower() : null,
                 Price = this.Price,
                 Model = this.Model,
                 VersionSystem = this.VersionSystem,

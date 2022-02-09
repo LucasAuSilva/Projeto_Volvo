@@ -14,7 +14,7 @@ namespace Projeto_Volvo.Api.Models.Dto
         {
             return new Buyer()
             {
-                Name = this.Name,
+                Name = this.Name != null ? this.Name.ToLower() : this.Name,
                 Cpf = this.Cpf,
                 Address = this.Address == null ? null : Address.CreateEntity(),
                 Contact = this.Contact == null ? null : Contact.CreateEntity()

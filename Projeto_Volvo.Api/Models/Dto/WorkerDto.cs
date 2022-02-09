@@ -18,7 +18,7 @@ namespace Projeto_Volvo.Api.Models.Dto
         {
             return new Worker()
             {
-                Name = this.Name,
+                Name = this.Name != null ? this.Name.ToLower() : this.Name,
                 BaseSalary = this.BaseSalary,
                 Cpf = this.Cpf,
                 Commission = this.Commission,

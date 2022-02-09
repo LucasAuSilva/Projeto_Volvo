@@ -11,7 +11,7 @@ namespace Projeto_Volvo.Api.Models.Dto
         {
             return new Category()
             {
-                Name = this.Name
+                Name = this.Name != null ? this.Name.ToLower() : this.Name,
             };
         }
     }

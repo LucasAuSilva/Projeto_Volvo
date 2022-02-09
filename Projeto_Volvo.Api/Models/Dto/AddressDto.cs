@@ -17,11 +17,11 @@ namespace Projeto_Volvo.Api.Models.Dto
         {
             return new Address()
             {
-                Street = this.Street,
-                District = this.District,
-                City = this.City,
+                Street = this.Street != null ? this.Street.ToLower() : null,
+                District = this.District != null ? this.District.ToLower() : null,
+                City = this.City != null ? this.City.ToLower() : null,
                 CodeCity = this.CodeCity,
-                State = this.State,
+                State = this.State != null ? this.State.ToLower() : null,
                 CodeState = this.CodeState,
                 Cep = this.Cep
             };

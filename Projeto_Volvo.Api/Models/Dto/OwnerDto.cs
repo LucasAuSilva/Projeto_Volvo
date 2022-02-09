@@ -15,7 +15,7 @@ namespace Projeto_Volvo.Api.Models.Dto
         {
             return new Owner()
             {
-                Name = this.Name,
+                Name = this.Name != null ? this.Name.ToLower() : this.Name,
                 Cpf = this.Cpf,
                 Cnpj = this.Cnpj,
                 Address = this.Address == null ? null : this.Address.CreateEntity(),
