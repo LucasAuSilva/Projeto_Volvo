@@ -97,12 +97,12 @@ C:\Users\Patchelli\Documents\PROG\Volvo\Mordor\Projeto_Volvo\Projeto_Volvo.Test\
 C:\Users\Patchelli\Documents\PROG\Volvo\Mordor\Projeto_Volvo\Projeto_Volvo.Test\obj\Debug\net6.0\ref\Projeto_Volvo.Test.dll
 C:\Users\Patchelli\Documents\PROG\Volvo\Mordor\Projeto_Volvo\Projeto_Volvo.Test\obj\Debug\net6.0\Projeto_Volvo.Test.pdb
 C:\Users\Patchelli\Documents\PROG\Volvo\Mordor\Projeto_Volvo\Projeto_Volvo.Test\obj\Debug\net6.0\Projeto_Volvo.Test.genruntimeconfig.cache
-C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Test\bin\Debug\net6.0\testhost.exe
 C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Test\bin\Debug\net6.0\testhost.dll
+C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Test\bin\Debug\net6.0\testhost.exe
+C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Test\bin\Debug\net6.0\Microsoft.TestPlatform.PlatformAbstractions.dll
 C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Test\bin\Debug\net6.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
 C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Test\bin\Debug\net6.0\xunit.runner.reporters.netcoreapp10.dll
 C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Test\bin\Debug\net6.0\xunit.runner.utility.netcoreapp10.dll
-C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Test\bin\Debug\net6.0\Microsoft.TestPlatform.PlatformAbstractions.dll
 C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Test\bin\Debug\net6.0\Projeto_Volvo.Test.deps.json
 C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Test\bin\Debug\net6.0\Projeto_Volvo.Test.runtimeconfig.json
 C:\Users\Patchelli\Documents\PROG\Volvo\Lucas\Projeto_Volvo\Projeto_Volvo.Test\bin\Debug\net6.0\Projeto_Volvo.Test.dll

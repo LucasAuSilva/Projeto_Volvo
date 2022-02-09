@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
 using System.Net;
 

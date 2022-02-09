@@ -25,7 +25,7 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Address>>> GetAddresses()
         {
-            throw new Exception("Não encontrado");
+           
             return await _context.Addresses.ToListAsync();
 
         }
@@ -38,7 +38,7 @@ namespace Projeto_Volvo.Api.Controllers
 
             if (address == null)
             {
-                throw new Exception("Id informado não foi encontrado");
+
                 return NotFound();
             }
                 
@@ -55,7 +55,7 @@ namespace Projeto_Volvo.Api.Controllers
             var UpdateAdress = await _context.Addresses.FindAsync(id);
             if (UpdateAdress == null)
             {
-                throw new Exception("Id Não encontrado para editar");
+ 
                 return NotFound();
             }
 
@@ -74,7 +74,6 @@ namespace Projeto_Volvo.Api.Controllers
             {
                 if (!AddressExists(id))
                 {
-                    throw new Exception("Id Não encontrado");
                     return NotFound();
                 }
                 else
@@ -104,7 +103,7 @@ namespace Projeto_Volvo.Api.Controllers
             var address = await _context.Addresses.FindAsync(id);
             if (address == null)
             {
-                throw new Exception("Id informado para deletar não foi encontrado");
+
                 return NotFound();
                 
             }

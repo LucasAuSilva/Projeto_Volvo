@@ -1,9 +1,4 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Projeto_Volvo.Api.Contracts;
@@ -44,8 +39,9 @@ namespace Projeto_Volvo.Api.Controllers
                 var worker = await workerRepository.GetOneEntity(id);
                 return worker;
             }
-            catch (EntityException ex)
+            catch (Exception ex)
             {
+                throw new Exception("Entidade não encontrada.");
                 return NotFound(ex.Message);
             }
         }

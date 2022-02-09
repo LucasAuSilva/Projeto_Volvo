@@ -23,7 +23,7 @@ namespace Projeto_Volvo.Api.Models.Dto
                 BaseSalary = this.BaseSalary,
                 Cpf = this.Cpf,
                 Commission = this.Commission,
-                Level = this.Level,
+                Level = Enum.EnumLevel.Funcionario,
                 Address = this.Address == null ? null : this.Address.CreateEntity(),
                 Contact = this.Contact == null ? null : this.Contact.CreateEntity(),
                 Dealership = this.Dealership == null ? null : this.Dealership.CreateEntity()

@@ -8,7 +8,7 @@ namespace Projeto_Volvo.Api.Exceptions
         { }
         public EntityException(string message) : base(message)
         {
-            this.StatusCode = 500;
+            
         }
 
         public EntityException(string message, int statusCode) : base(message)
