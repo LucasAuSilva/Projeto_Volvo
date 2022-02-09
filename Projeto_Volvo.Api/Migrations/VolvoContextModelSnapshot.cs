@@ -22,27 +22,34 @@ namespace Projeto_Volvo.Api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Projeto_Volvo.Api.Models.AcessoriesCategory", b =>
+            modelBuilder.Entity("AcessoryCar", b =>
                 {
-                    b.Property<int>("IdAcessoriesCategory")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("AcessoriesIdAcessory")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAcessoriesCategory"), 1L, 1);
-
-                    b.Property<int?>("AcessoryId")
+                    b.Property<int>("CarsIdCar")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CategoryId")
+                    b.HasKey("AcessoriesIdAcessory", "CarsIdCar");
+
+                    b.HasIndex("CarsIdCar");
+
+                    b.ToTable("AcessoryCar");
+                });
+
+            modelBuilder.Entity("AcessoryCategory", b =>
+                {
+                    b.Property<int>("AcessoriesIdAcessory")
                         .HasColumnType("int");
 
-                    b.HasKey("IdAcessoriesCategory");
+                    b.Property<int>("CategoriesIdCategory")
+                        .HasColumnType("int");
 
-                    b.HasIndex("AcessoryId");
+                    b.HasKey("AcessoriesIdAcessory", "CategoriesIdCategory");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoriesIdCategory");
 
-                    b.ToTable("AcessoriesCategories");
+                    b.ToTable("AcessoryCategory");
                 });
 
             modelBuilder.Entity("Projeto_Volvo.Api.Models.Acessory", b =>
@@ -53,9 +60,6 @@ namespace Projeto_Volvo.Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAcessory"), 1L, 1);
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -65,8 +69,6 @@ namespace Projeto_Volvo.Api.Migrations
                         .HasColumnType("nvarchar(80)");
 
                     b.HasKey("IdAcessory");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Acessories");
                 });
@@ -149,9 +151,6 @@ namespace Projeto_Volvo.Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCar"), 1L, 1);
 
-                    b.Property<int?>("AcessoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Color")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -181,8 +180,6 @@ namespace Projeto_Volvo.Api.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("IdCar");
-
-                    b.HasIndex("AcessoryId");
 
                     b.HasIndex("OwnerId");
 
@@ -381,28 +378,34 @@ namespace Projeto_Volvo.Api.Migrations
                     b.ToTable("Workers");
                 });
 
-            modelBuilder.Entity("Projeto_Volvo.Api.Models.AcessoriesCategory", b =>
+            modelBuilder.Entity("AcessoryCar", b =>
                 {
-                    b.HasOne("Projeto_Volvo.Api.Models.Acessory", "Acessorie")
-                        .WithMany("AcessoriesCategories")
-                        .HasForeignKey("AcessoryId");
+                    b.HasOne("Projeto_Volvo.Api.Models.Acessory", null)
+                        .WithMany()
+                        .HasForeignKey("AcessoriesIdAcessory")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Projeto_Volvo.Api.Models.Category", "Category")
-                        .WithMany("AcessoriesCategories")
-                        .HasForeignKey("CategoryId");
-
-                    b.Navigation("Acessorie");
-
-                    b.Navigation("Category");
+                    b.HasOne("Projeto_Volvo.Api.Models.Car", null)
+                        .WithMany()
+                        .HasForeignKey("CarsIdCar")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Projeto_Volvo.Api.Models.Acessory", b =>
+            modelBuilder.Entity("AcessoryCategory", b =>
                 {
-                    b.HasOne("Projeto_Volvo.Api.Models.Category", "Category")
-                        .WithMany("Acessories")
-                        .HasForeignKey("CategoryId");
+                    b.HasOne("Projeto_Volvo.Api.Models.Acessory", null)
+                        .WithMany()
+                        .HasForeignKey("AcessoriesIdAcessory")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Category");
+                    b.HasOne("Projeto_Volvo.Api.Models.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesIdCategory")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Projeto_Volvo.Api.Models.Buyer", b =>
@@ -422,15 +425,9 @@ namespace Projeto_Volvo.Api.Migrations
 
             modelBuilder.Entity("Projeto_Volvo.Api.Models.Car", b =>
                 {
-                    b.HasOne("Projeto_Volvo.Api.Models.Acessory", "Acessorie")
-                        .WithMany("Cars")
-                        .HasForeignKey("AcessoryId");
-
                     b.HasOne("Projeto_Volvo.Api.Models.Owner", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId");
-
-                    b.Navigation("Acessorie");
 
                     b.Navigation("Owner");
                 });
@@ -513,13 +510,6 @@ namespace Projeto_Volvo.Api.Migrations
                     b.Navigation("Dealership");
                 });
 
-            modelBuilder.Entity("Projeto_Volvo.Api.Models.Acessory", b =>
-                {
-                    b.Navigation("AcessoriesCategories");
-
-                    b.Navigation("Cars");
-                });
-
             modelBuilder.Entity("Projeto_Volvo.Api.Models.Address", b =>
                 {
                     b.Navigation("Buyers");
@@ -539,13 +529,6 @@ namespace Projeto_Volvo.Api.Migrations
             modelBuilder.Entity("Projeto_Volvo.Api.Models.Car", b =>
                 {
                     b.Navigation("Sales");
-                });
-
-            modelBuilder.Entity("Projeto_Volvo.Api.Models.Category", b =>
-                {
-                    b.Navigation("Acessories");
-
-                    b.Navigation("AcessoriesCategories");
                 });
 
             modelBuilder.Entity("Projeto_Volvo.Api.Models.Contact", b =>

@@ -5,10 +5,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Projeto_Volvo.Api.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Acessories",
+                columns: table => new
+                {
+                    IdAcessory = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Acessories", x => x.IdAcessory);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Addresses",
                 columns: table => new
@@ -57,23 +71,27 @@ namespace Projeto_Volvo.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Acessories",
+                name: "AcessoryCategory",
                 columns: table => new
                 {
-                    IdAcessory = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    CategoryId = table.Column<int>(type: "int", nullable: true)
+                    AcessoriesIdAcessory = table.Column<int>(type: "int", nullable: false),
+                    CategoriesIdCategory = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Acessories", x => x.IdAcessory);
+                    table.PrimaryKey("PK_AcessoryCategory", x => new { x.AcessoriesIdAcessory, x.CategoriesIdCategory });
                     table.ForeignKey(
-                        name: "FK_Acessories_Categories_CategoryId",
-                        column: x => x.CategoryId,
+                        name: "FK_AcessoryCategory_Acessories_AcessoriesIdAcessory",
+                        column: x => x.AcessoriesIdAcessory,
+                        principalTable: "Acessories",
+                        principalColumn: "IdAcessory",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AcessoryCategory_Categories_CategoriesIdCategory",
+                        column: x => x.CategoriesIdCategory,
                         principalTable: "Categories",
-                        principalColumn: "IdCategory");
+                        principalColumn: "IdCategory",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,55 +174,6 @@ namespace Projeto_Volvo.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AcessoriesCategories",
-                columns: table => new
-                {
-                    IdAcessoriesCategory = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AcessoryId = table.Column<int>(type: "int", nullable: true),
-                    CategoryId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AcessoriesCategories", x => x.IdAcessoriesCategory);
-                    table.ForeignKey(
-                        name: "FK_AcessoriesCategories_Acessories_AcessoryId",
-                        column: x => x.AcessoryId,
-                        principalTable: "Acessories",
-                        principalColumn: "IdAcessory");
-                    table.ForeignKey(
-                        name: "FK_AcessoriesCategories_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "IdCategory");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cars",
-                columns: table => new
-                {
-                    IdCar = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Kilometrage = table.Column<int>(type: "int", nullable: false),
-                    Year = table.Column<int>(type: "int", nullable: false),
-                    NumberChassis = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    Color = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    Price = table.Column<float>(type: "real", nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    VersionSystem = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    AcessoryId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cars", x => x.IdCar);
-                    table.ForeignKey(
-                        name: "FK_Cars_Acessories_AcessoryId",
-                        column: x => x.AcessoryId,
-                        principalTable: "Acessories",
-                        principalColumn: "IdAcessory");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Workers",
                 columns: table => new
                 {
@@ -237,6 +206,55 @@ namespace Projeto_Volvo.Api.Migrations
                         column: x => x.DealershipId,
                         principalTable: "Dealerships",
                         principalColumn: "IdDealership");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cars",
+                columns: table => new
+                {
+                    IdCar = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Kilometrage = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    NumberChassis = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Color = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    Model = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    VersionSystem = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    OwnerId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cars", x => x.IdCar);
+                    table.ForeignKey(
+                        name: "FK_Cars_Owners_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Owners",
+                        principalColumn: "IdOwner");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AcessoryCar",
+                columns: table => new
+                {
+                    AcessoriesIdAcessory = table.Column<int>(type: "int", nullable: false),
+                    CarsIdCar = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AcessoryCar", x => new { x.AcessoriesIdAcessory, x.CarsIdCar });
+                    table.ForeignKey(
+                        name: "FK_AcessoryCar_Acessories_AcessoriesIdAcessory",
+                        column: x => x.AcessoriesIdAcessory,
+                        principalTable: "Acessories",
+                        principalColumn: "IdAcessory",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AcessoryCar_Cars_CarsIdCar",
+                        column: x => x.CarsIdCar,
+                        principalTable: "Cars",
+                        principalColumn: "IdCar",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -278,19 +296,14 @@ namespace Projeto_Volvo.Api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Acessories_CategoryId",
-                table: "Acessories",
-                column: "CategoryId");
+                name: "IX_AcessoryCar_CarsIdCar",
+                table: "AcessoryCar",
+                column: "CarsIdCar");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AcessoriesCategories_AcessoryId",
-                table: "AcessoriesCategories",
-                column: "AcessoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AcessoriesCategories_CategoryId",
-                table: "AcessoriesCategories",
-                column: "CategoryId");
+                name: "IX_AcessoryCategory_CategoriesIdCategory",
+                table: "AcessoryCategory",
+                column: "CategoriesIdCategory");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Buyers_AddressId",
@@ -303,9 +316,9 @@ namespace Projeto_Volvo.Api.Migrations
                 column: "ContactId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cars_AcessoryId",
+                name: "IX_Cars_OwnerId",
                 table: "Cars",
-                column: "AcessoryId");
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Dealerships_AddressId",
@@ -366,13 +379,19 @@ namespace Projeto_Volvo.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AcessoriesCategories");
+                name: "AcessoryCar");
 
             migrationBuilder.DropTable(
-                name: "Owners");
+                name: "AcessoryCategory");
 
             migrationBuilder.DropTable(
                 name: "Sales");
+
+            migrationBuilder.DropTable(
+                name: "Acessories");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Buyers");
@@ -384,13 +403,10 @@ namespace Projeto_Volvo.Api.Migrations
                 name: "Workers");
 
             migrationBuilder.DropTable(
-                name: "Acessories");
+                name: "Owners");
 
             migrationBuilder.DropTable(
                 name: "Dealerships");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Addresses");

@@ -10,17 +10,13 @@ namespace Projeto_Volvo.Api.Models
         public Category()
         {
             Acessories = new HashSet<Acessory>();
-            AcessoriesCategories = new HashSet<AcessoriesCategory>();
         }
 
         [Key]
         public int IdCategory { get; set; }
         [MaxLength(80)]
         public string? Name { get; set; }
-
         [JsonIgnore]
         public virtual ICollection<Acessory> Acessories { get; set; }
-        [JsonIgnore]
-        public virtual ICollection<AcessoriesCategory> AcessoriesCategories { get; set; }
     }
 }

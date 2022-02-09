@@ -7,7 +7,7 @@ namespace Projeto_Volvo.Api.Models.Dto
         public int? IdAcessory { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public virtual CategoryDto? Category { get; set; }
+        public virtual ICollection<CategoryDto>? Categories { get; set; }
 
         public Acessory CreateEntity()
         {
@@ -15,7 +15,6 @@ namespace Projeto_Volvo.Api.Models.Dto
             {
                 Name = this.Name,
                 Description = this.Description,
-                Category = this.Category == null ? null : this.Category.CreateEntity()
             };
         }
     }

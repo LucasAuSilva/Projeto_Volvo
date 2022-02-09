@@ -13,8 +13,6 @@ namespace Projeto_Volvo.Api.Models
         }
 
         private readonly IConfiguration? _config;
-        public virtual DbSet<AcessoriesCategory> AcessoriesCategories
-        { get; set; } = null!;
         public virtual DbSet<Acessory> Acessories { get; set; } = null!;
         public virtual DbSet<Address> Addresses { get; set; } = null!;
         public virtual DbSet<Buyer> Buyers { get; set; } = null!;
