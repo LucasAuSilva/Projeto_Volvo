@@ -25,6 +25,7 @@ namespace Projeto_Volvo.Api.Service
             else if (dto.Category.IdCategory.HasValue)
             {
                 var category = await categoryRepo.GetOneEntity((int)dto.Category.IdCategory);
+                acessory.Category = category;
             }
 
             return acessory;
