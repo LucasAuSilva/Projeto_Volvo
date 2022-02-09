@@ -32,10 +32,10 @@ namespace Projeto_Volvo.Api.Controllers
 
         // GET: api/Dealerships
         [HttpGet]
-        public async Task<ActionResult<ICollection<Dealership>>> GetDealerships()
+        public async Task<ActionResult<ICollection<DealershipDto>>> GetDealerships()
         {
-            var dealership = await dealershipRepository.GetAllEntity();
-            return Ok(dealership);
+            var dealerships = await dealershipRepository.GetAllEntity();
+            return Ok(dealerships.Select(d => new DealershipDto(d)).ToList());
         }
 
         // GET: api/Dealerships/5

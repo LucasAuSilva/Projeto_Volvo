@@ -50,6 +50,17 @@ namespace Projeto_Volvo.Api.Controllers
             }
         }
 
+        // GET: api/Cars/kilometers?km=10223&version=1.2
+        [HttpGet("kilometers")]
+        public async Task<ActionResult> GetCarsPerKmAndVersion(
+            [FromQuery] int km,
+            [FromQuery] string version
+        )
+        {
+            var cars = await carRepository.GetCarsPerKmAndSystemVersion(km, version);
+            return Ok(cars);
+        }
+
         // PUT: api/Cars/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

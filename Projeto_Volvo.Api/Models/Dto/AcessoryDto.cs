@@ -13,8 +13,8 @@ namespace Projeto_Volvo.Api.Models.Dto
         {
             return new Acessory()
             {
-                Name = this.Name,
-                Description = this.Description,
+                Name = this.Name != null ? this.Name.ToLower() : null,
+                Description = this.Description != null ? this.Description.ToLower() : null,
             };
         }
     }

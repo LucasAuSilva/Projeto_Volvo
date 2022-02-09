@@ -17,7 +17,10 @@ namespace Projeto_Volvo.Api.Repository
 
         public async Task<ICollection<Sale>> GetSalesOnMonth(int workerId, DateTime month)
         {
-            var worker = await context.Workers.FindAsync(workerId);
+            var worker = await context.Workers
+                .Include("Sales")
+                .SingleAsync(w => w.IdWorker == workerId);
+
             if (worker != null)
             {
                 var sales = worker.Sales
@@ -62,7 +65,14 @@ namespace Projeto_Volvo.Api.Repository
 
         public async Task<Worker> GetOneEntity(int id)
         {
-            var entity = await context.Set<Worker>().FindAsync(id);
+            var entity = await context
+                .Set<Worker>()
+                .Include("Contact")
+                .Include("Address")
+                .Include("Dealership")
+                .Include("Sales")
+                .SingleAsync(w => w.IdWorker == id);
+
             if (entity != null)
             {
                 return entity;

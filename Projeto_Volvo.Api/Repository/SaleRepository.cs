@@ -47,7 +47,13 @@ namespace Projeto_Volvo.Api.Repository
 
         public async Task<Sale> GetOneEntity(int id)
         {
-            var entity = await context.Set<Sale>().FindAsync(id);
+            var entity = await context.Set<Sale>()
+                .Include("Buyer")
+                .Include("Car")
+                .Include("Dealership")
+                .Include("Worker")
+                .SingleAsync(s => s.IdSale == id);
+
             if (entity != null)
             {
                 return entity;

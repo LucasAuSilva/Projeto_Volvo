@@ -10,6 +10,7 @@ namespace Projeto_Volvo.Api.Models
     {
         public Car()
         {
+            Acessories = new HashSet<Acessory>();
             Sales = new HashSet<Sale>();
         }
 
@@ -29,7 +30,7 @@ namespace Projeto_Volvo.Api.Models
         [ForeignKey("OwnerId")]
         public virtual Owner? Owner { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Acessory>? Acessories { get; set; }
+        public virtual ICollection<Acessory> Acessories { get; set; }
         [JsonIgnore]
         public virtual ICollection<Sale> Sales { get; set; }
     }

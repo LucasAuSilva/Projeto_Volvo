@@ -47,7 +47,11 @@ namespace Projeto_Volvo.Api.Repository
 
         public async Task<Owner> GetOneEntity(int id)
         {
-            var entity = await context.Set<Owner>().FindAsync(id);
+            var entity = await context.Set<Owner>()
+                .Include("Address")
+                .Include("Contact")
+                .SingleAsync(o => o.IdOwner == id);
+
             if (entity != null)
             {
                 return entity;
