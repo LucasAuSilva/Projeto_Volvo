@@ -4,7 +4,7 @@ namespace Projeto_Volvo.Api.Models.Dto
 {
     public class OwnerDto : IDto<Owner>
     {
-        public int IdOwner { get; set; }
+        public int? IdOwner { get; set; }
         public string? Name { get; set; }
         public string? Cpf { get; set; }
         public string? Cnpj { get; set; }

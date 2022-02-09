@@ -4,7 +4,7 @@ namespace Projeto_Volvo.Api.Models.Dto
 {
     public class AddressDto : IDto<Address>
     {
-        public int IdAddress { get; set; }
+        public int? IdAddress { get; set; }
         public string? Street { get; set; }
         public string? District { get; set; }
         public string? City { get; set; }

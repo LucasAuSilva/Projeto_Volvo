@@ -4,7 +4,7 @@ namespace Projeto_Volvo.Api.Models.Dto
 {
     public class AcessoryDto : IDto<Acessory>
     {
-        public int IdAcessory { get; set; }
+        public int? IdAcessory { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
         public virtual CategoryDto? Category { get; set; }
@@ -15,7 +15,7 @@ namespace Projeto_Volvo.Api.Models.Dto
             {
                 Name = this.Name,
                 Description = this.Description,
-                Category = this.Category.CreateEntity()
+                Category = this.Category == null ? null : this.Category.CreateEntity()
             };
         }
     }
