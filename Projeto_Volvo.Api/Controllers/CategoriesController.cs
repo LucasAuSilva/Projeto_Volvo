@@ -36,15 +36,8 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategory(int id)
         {
-            try
-            {
-                var category = await categoryRepository.GetOneEntity(id);
-                return category;
-            }
-            catch (EntityException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var category = await categoryRepository.GetOneEntity(id);
+            return category;
         }
 
         // PUT: api/Categories/5

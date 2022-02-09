@@ -16,7 +16,7 @@ namespace Projeto_Volvo.Api.Models.Dto
         {
             return new Sale()
             {
-                Data = this.Data,
+                Data = DateTime.Now,
                 SaleValue = this.SaleValue,
                 Buyer = buyer,
                 Worker = worker,

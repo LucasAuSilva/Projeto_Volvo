@@ -53,7 +53,7 @@ namespace Projeto_Volvo.Api.Repository
                 return entity;
             }
 
-            throw new EntityException("Categoria não encontrada.");
+            throw new EntityException("Categoria não encontrada.", 404);
         }
 
         public async Task<Category> UpdateEntity(int id, Category entity)

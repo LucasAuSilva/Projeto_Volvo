@@ -41,7 +41,7 @@ namespace Projeto_Volvo.Api.Repository
                 await context.SaveChangesAsync();
             }
 
-            throw new EntityException("Carro não encontrado.");
+            throw new EntityException("Carro não encontrado.", 404);
         }
 
         public async Task<ICollection<Car>> GetAllEntity()
