@@ -31,8 +31,8 @@ namespace Projeto_Volvo.Api.Repository
                 context.Set<Address>().Remove(entity);
                 await context.SaveChangesAsync();
             }
-            
-            throw new EntityException("Entidade não encontrada.");
+
+            throw new EntityException("Endereco não encontrado.");
         }
 
         public async Task<ICollection<Address>> GetAllEntity()
@@ -54,7 +54,7 @@ namespace Projeto_Volvo.Api.Repository
                 return entity;
             }
 
-            throw new EntityException("Entidade não encontrada.");
+            throw new EntityException("Endereco não encontrado.");
         }
 
         public async Task<Address> UpdateEntity(int id, Address entity)
@@ -67,7 +67,7 @@ namespace Projeto_Volvo.Api.Repository
                 return entity;
             }
 
-            throw new EntityException("Entidade não encontrada.");
+            throw new EntityException("Endereco não encontrado.");
         }
 
         protected async virtual void Dispose(bool disposing)
