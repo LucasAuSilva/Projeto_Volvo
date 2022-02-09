@@ -36,7 +36,8 @@ namespace Projeto_Volvo.Api.Repository
 
         public async Task<ICollection<Dealership>> GetAllEntity()
         {
-            var entities = await context.Set<Dealership>().ToListAsync<Dealership>();
+            var entities = await context.Set<Dealership>().ToListAsync();
+
             return entities;
         }
 
@@ -47,7 +48,12 @@ namespace Projeto_Volvo.Api.Repository
 
         public async Task<Dealership> GetOneEntity(int id)
         {
-            var entity = await context.Set<Dealership>().FindAsync(id);
+            var entity = await context
+            .Dealerships
+            .Include("Contact")
+            .Include("Address")
+            .SingleAsync(d => d.IdDealership == id);
+
             if (entity != null)
             {
                 return entity;

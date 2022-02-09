@@ -10,6 +10,23 @@ namespace Projeto_Volvo.Api.Models.Dto
         public virtual AddressDto? Address { get; set; }
         public virtual ContactDto? Contact { get; set; }
 
+        public DealershipDto() { }
+
+        public DealershipDto(Dealership dealership)
+        {
+            IdDealership = dealership.IdDealership;
+            Name = dealership.Name;
+            Cnpj = dealership.Cnpj;
+            if (dealership.Address != null)
+            {
+                Address = new AddressDto(dealership.Address);
+            }
+            if (dealership.Contact != null)
+            {
+                Contact = new ContactDto(dealership.Contact);
+            }
+        }
+
         public Dealership CreateEntity()
         {
             return new Dealership()

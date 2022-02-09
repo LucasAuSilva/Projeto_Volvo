@@ -13,6 +13,20 @@ namespace Projeto_Volvo.Api.Models.Dto
         public int CodeState { get; set; }
         public string? Cep { get; set; }
 
+        public AddressDto() { }
+
+        public AddressDto(Address address)
+        {
+            IdAddress = address.IdAddress;
+            Street = address.Street;
+            District = address.District;
+            City = address.City;
+            CodeCity = address.CodeCity;
+            State = address.State;
+            CodeState = address.CodeState;
+            Cep = address.Cep;
+        }
+
         public Address CreateEntity()
         {
             return new Address()
