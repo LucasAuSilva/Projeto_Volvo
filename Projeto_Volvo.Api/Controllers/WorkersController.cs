@@ -41,8 +41,7 @@ namespace Projeto_Volvo.Api.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Entidade não encontrada.");
-                return NotFound(ex.Message);
+                throw new Exception(ex.Message);
             }
         }
 
