@@ -15,6 +15,16 @@ namespace Projeto_Volvo.Api.Repository
             this.context = context;
         }
 
+        public async Task<ICollection<Car>> GetCarsPerKmAndSystemVersion(int km, string versionSystem)
+        {
+            var cars = await context.Cars
+                .Where(c => c.Kilometrage >= km)
+                .Where(c => c.VersionSystem == versionSystem)
+                .ToListAsync();
+
+            return cars;
+        }
+
         public async Task<Car> AddEntity(Car entity)
         {
             await context.Set<Car>().AddAsync(entity);
