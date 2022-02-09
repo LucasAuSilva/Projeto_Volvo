@@ -18,14 +18,14 @@ namespace Projeto_Volvo.Api.Service
         public async Task<Buyer> CreateBuyer(BuyerDto dto)
         {
             var buyer = dto.CreateEntity();
-            if (dto.Address != null && dto.Address.IdAddress != null)
+            if (dto.Address != null && dto.Address.IdAddress.HasValue)
             {
-                var address = await addressRepo.GetOneEntity(dto.Address.IdAddress);
+                var address = await addressRepo.GetOneEntity((int)dto.Address.IdAddress);
                 buyer.Address = address;
             }
-            if (dto.Contact != null && dto.Contact.IdContact != null)
+            if (dto.Contact != null && dto.Contact.IdContact.HasValue)
             {
-                var contact = await contactRepo.GetOneEntity(dto.Contact.IdContact);
+                var contact = await contactRepo.GetOneEntity((int)dto.Contact.IdContact);
                 buyer.Contact = contact;
             }
 

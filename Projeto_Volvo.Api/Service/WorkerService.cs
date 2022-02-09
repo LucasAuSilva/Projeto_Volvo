@@ -24,19 +24,19 @@ namespace Projeto_Volvo.Api.Service
         public async Task<Worker> CreateWorker(WorkerDto dto)
         {
             var worker = dto.CreateEntity();
-            if (dto.Dealership != null && dto.Dealership.IdDealership != null)
+            if (dto.Dealership != null && dto.Dealership.IdDealership.HasValue)
             {
-                var dealership = await dealershipRepo.GetOneEntity(dto.Dealership.IdDealership);
+                var dealership = await dealershipRepo.GetOneEntity((int)dto.Dealership.IdDealership);
                 worker.Dealership = dealership;
             }
-            if (dto.Contact != null && dto.Contact.IdContact != null)
+            if (dto.Contact != null && dto.Contact.IdContact.HasValue)
             {
-                var contact = await contactRepo.GetOneEntity(dto.Contact.IdContact);
+                var contact = await contactRepo.GetOneEntity((int)dto.Contact.IdContact);
                 worker.Contact = contact;
             }
-            if (dto.Address != null && dto.Address.IdAddress != null)
+            if (dto.Address != null && dto.Address.IdAddress.HasValue)
             {
-                var address = await addressRepo.GetOneEntity(dto.Address.IdAddress);
+                var address = await addressRepo.GetOneEntity((int)dto.Address.IdAddress);
                 worker.Address = address;
             }
 
