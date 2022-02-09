@@ -46,7 +46,7 @@ namespace Projeto_Volvo.Api.Repository
                 await context.SaveChangesAsync();
             }
 
-            throw new EntityException("Entidade não encontrada.");
+            throw new EntityException("Vendedor não encontrado.");
         }
 
         public async Task<ICollection<Worker>> GetAllEntity()
@@ -68,7 +68,7 @@ namespace Projeto_Volvo.Api.Repository
                 return entity;
             }
 
-            throw new EntityException("Entidade não encontrada.");
+            throw new EntityException("Vendedor não encontrado.");
         }
 
         public async Task<Worker> UpdateEntity(int id, Worker entity)
@@ -81,7 +81,7 @@ namespace Projeto_Volvo.Api.Repository
                 return entity;
             }
 
-            throw new EntityException("Entidade não encontrada.");
+            throw new EntityException("Vendedor não encontrado.", 400);
         }
 
         protected async virtual void Dispose(bool disposing)

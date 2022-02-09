@@ -10,6 +10,7 @@ using Projeto_Volvo.Api.Contracts;
 using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
 using Projeto_Volvo.Api.Models.Dto;
+using Projeto_Volvo.Api.Service;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -18,9 +19,11 @@ namespace Projeto_Volvo.Api.Controllers
     public class CarsController : ControllerBase
     {
         private readonly ICarRepository carRepository;
+        private readonly ICarService carService;
 
-        public CarsController(ICarRepository carRepository)
+        public CarsController(ICarRepository carRepository, ICarService carService)
         {
+            this.carService = carService;
             this.carRepository = carRepository;
         }
 
@@ -77,7 +80,8 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Car>> PostCar(CarDto carDto)
         {
-            var car = await carRepository.AddEntity(carDto.CreateEntity());
+            var newCar = await carService.CreateCar(carDto);
+            var car = await carRepository.AddEntity(newCar);
             return CreatedAtAction("GetCar", new { id = car.IdCar }, car);
         }
 
@@ -92,8 +96,7 @@ namespace Projeto_Volvo.Api.Controllers
             }
             catch (EntityException ex)
             {
-                throw new EntityException("Entidade não encontrada.");
-                return NotFound(ex.Message);
+                throw new EntityException(ex.Message);
             }
         }
     }

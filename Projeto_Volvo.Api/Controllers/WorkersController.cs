@@ -5,6 +5,7 @@ using Projeto_Volvo.Api.Contracts;
 using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
 using Projeto_Volvo.Api.Models.Dto;
+using Projeto_Volvo.Api.Service;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -13,10 +14,12 @@ namespace Projeto_Volvo.Api.Controllers
     public class WorkersController : ControllerBase
     {
         private readonly IWorkerRepository workerRepository;
+        private readonly IWorkerService workerService;
 
-        public WorkersController(IWorkerRepository workerRepository)
+        public WorkersController(IWorkerRepository workerRepository, IWorkerService workerService)
         {
             this.workerRepository = workerRepository;
+            this.workerService = workerService;
         }
 
         // GET: api/Workers
@@ -38,9 +41,16 @@ namespace Projeto_Volvo.Api.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Entidade não encontrada.");
-                return NotFound(ex.Message);
+                throw new Exception(ex.Message);
             }
+        }
+
+        // GET: api/Workers/salary/5
+        public async Task<IActionResult> GetSalaryOnMonth(int id, [FromBody] DateDto dateDto)
+        {
+            var worker = await workerRepository.GetOneEntity(id);
+            var sales = await workerRepository.GetSalesOnMonth(id, dateDto.CreateEntity());
+            return Ok(workerService.CreateSalary(sales, worker));
         }
 
         // PUT: api/Workers/5
@@ -73,7 +83,8 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Worker>> PostWorker(WorkerDto workerDto)
         {
-            var worker = await workerRepository.AddEntity(workerDto.CreateEntity());
+            var newWorker = await workerService.CreateWorker(workerDto);
+            var worker = await workerRepository.AddEntity(newWorker);
             return CreatedAtAction("GetWorker", new { id = worker.IdWorker }, worker);
         }
 

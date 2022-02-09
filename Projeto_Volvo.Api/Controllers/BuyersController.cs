@@ -10,6 +10,7 @@ using Projeto_Volvo.Api.Contracts;
 using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
 using Projeto_Volvo.Api.Models.Dto;
+using Projeto_Volvo.Api.Service;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -18,10 +19,12 @@ namespace Projeto_Volvo.Api.Controllers
     public class BuyersController : ControllerBase
     {
         private readonly IBuyerRepository buyerRepository;
+        private readonly IBuyerService buyerService;
 
-        public BuyersController(IBuyerRepository buyerRepository)
+        public BuyersController(IBuyerRepository buyerRepository, IBuyerService buyerService)
         {
             this.buyerRepository = buyerRepository;
+            this.buyerService = buyerService;
         }
 
         // GET: api/Buyers
@@ -77,7 +80,8 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Buyer>> PostBuyer(BuyerDto buyerDto)
         {
-            var buyer = await buyerRepository.AddEntity(buyerDto.CreateEntity());
+            var newBuyer = await buyerService.CreateBuyer(buyerDto);
+            var buyer = await buyerRepository.AddEntity(newBuyer);
             return CreatedAtAction("GetBuyer", new { id = buyer.IdBuyer }, buyer);
         }
 

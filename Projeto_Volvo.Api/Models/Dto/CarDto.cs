@@ -4,7 +4,7 @@ namespace Projeto_Volvo.Api.Models.Dto
 {
     public class CarDto : IDto<Car>
     {
-        public int IdCar { get; set; }
+        public int? IdCar { get; set; }
         public int Kilometrage { get; set; }
         public int Year { get; set; }
         public string? NumberChassis { get; set; }
@@ -25,7 +25,7 @@ namespace Projeto_Volvo.Api.Models.Dto
                 Price = this.Price,
                 Model = this.Model,
                 VersionSystem = this.VersionSystem,
-                Owner = this.Owner.CreateEntity()
+                Owner = this.Owner == null ? null : this.Owner.CreateEntity()
             };
         }
     }

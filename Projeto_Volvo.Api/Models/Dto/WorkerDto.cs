@@ -4,7 +4,7 @@ namespace Projeto_Volvo.Api.Models.Dto
 {
     public class WorkerDto : IDto<Worker>
     {
-        public int IdWorker { get; set; }
+        public int? IdWorker { get; set; }
         public string? Name { get; set; }
         public float BaseSalary { get; set; }
         public string? Cpf { get; set; }
@@ -24,6 +24,7 @@ namespace Projeto_Volvo.Api.Models.Dto
                 Commission = this.Commission,
                 Level = Enum.EnumLevel.Funcionario,
                 Address = this.Address == null ? null : this.Address.CreateEntity(),
+                Contact = this.Contact == null ? null : this.Contact.CreateEntity(),
                 Dealership = this.Dealership == null ? null : this.Dealership.CreateEntity()
             };
         }

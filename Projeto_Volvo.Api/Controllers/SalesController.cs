@@ -10,6 +10,7 @@ using Projeto_Volvo.Api.Contracts;
 using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
 using Projeto_Volvo.Api.Models.Dto;
+using Projeto_Volvo.Api.Service;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -18,10 +19,12 @@ namespace Projeto_Volvo.Api.Controllers
     public class SalesController : ControllerBase
     {
         private readonly ISaleRepository saleRepository;
+        private readonly ISaleService saleService;
 
-        public SalesController(ISaleRepository saleRepository)
+        public SalesController(ISaleRepository saleRepository, ISaleService saleService)
         {
             this.saleRepository = saleRepository;
+            this.saleService = saleService;
         }
 
         // GET: api/Sales
@@ -49,39 +52,39 @@ namespace Projeto_Volvo.Api.Controllers
 
         // PUT: api/Sales/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        // TODO: Fazer update de venda
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> PutSale(int id, [FromBody] SaleDto sale)
-        // {
-        //     if (id != sale.IdSale)
-        //     {
-        //         return BadRequest();
-        //     }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutSale(int id, [FromBody] SaleDto saleDto)
+        {
+            if (id != saleDto.IdSale)
+            {
+                return BadRequest();
+            }
 
-        //     try
-        //     {
-        //         var updateSale = await saleRepository.UpdateEntity(id, sale.CreateEntity());
-        //         return Ok(updateSale);
-        //     }
-        //     catch (EntityException ex)
-        //     {
-        //         return NotFound(ex.Message);
-        //     }
-        //     catch (DbUpdateConcurrencyException)
-        //     {
-        //         throw;
-        //     }
-        // }
+            try
+            {
+                var sale = await saleService.CreateSale(saleDto);
+                var updateSale = await saleRepository.UpdateEntity(id, sale);
+                return Ok(updateSale);
+            }
+            catch (EntityException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+        }
 
         // POST: api/Sales
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        // TODO: Fazer metodo POST para criar venda.
-        // [HttpPost]
-        // public async Task<ActionResult<Sale>> PostSale(SaleDto saleDto)
-        // {
-        //     var sale = await saleRepository.AddEntity(saleDto.CreateEntity());
-        //     return CreatedAtAction("GetSale", new { id = sale.IdSale }, sale);
-        // }
+        [HttpPost]
+        public async Task<ActionResult<Sale>> PostSale(SaleDto saleDto)
+        {
+            var newSale = await saleService.CreateSale(saleDto);
+            var sale = await saleRepository.AddEntity(newSale);
+            return CreatedAtAction("GetSale", new { id = sale.IdSale }, sale);
+        }
 
         // DELETE: api/Sales/5
         [HttpDelete("{id}")]

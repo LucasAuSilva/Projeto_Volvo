@@ -31,7 +31,7 @@ namespace Projeto_Volvo.Api.Repository
                 await context.SaveChangesAsync();
             }
 
-            throw new EntityException("Entidade não encontrada.");
+            throw new EntityException("AcessorioCategoria não encontrado.");
         }
 
         public async Task<ICollection<AcessoriesCategory>> GetAllEntity()
@@ -53,7 +53,7 @@ namespace Projeto_Volvo.Api.Repository
                 return entity;
             }
 
-            throw new EntityException("Entidade não encontrada.");
+            throw new EntityException("AcessorioCategoria não encontrado.");
         }
 
         public async Task<AcessoriesCategory> UpdateEntity(int id, AcessoriesCategory entity)
@@ -66,7 +66,7 @@ namespace Projeto_Volvo.Api.Repository
                 return entity;
             }
 
-            throw new EntityException("Entidade não encontrada.");
+            throw new EntityException("AcessorioCategoria não encontrado.");
         }
 
         protected async virtual void Dispose(bool disposing)

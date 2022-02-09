@@ -10,6 +10,7 @@ using Projeto_Volvo.Api.Contracts;
 using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
 using Projeto_Volvo.Api.Models.Dto;
+using Projeto_Volvo.Api.Service;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -18,10 +19,15 @@ namespace Projeto_Volvo.Api.Controllers
     public class DealershipsController : ControllerBase
     {
         private readonly IDealershipRepository dealershipRepository;
+        private readonly IDealershipService dealershipService;
 
-        public DealershipsController(IDealershipRepository dealershipRepository)
+        public DealershipsController(
+            IDealershipRepository dealershipRepository,
+            IDealershipService dealershipService
+        )
         {
             this.dealershipRepository = dealershipRepository;
+            this.dealershipService = dealershipService;
         }
 
         // GET: api/Dealerships
@@ -77,7 +83,8 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Dealership>> PostDealership(DealershipDto dealershipDto)
         {
-            var dealership = await dealershipRepository.AddEntity(dealershipDto.CreateEntity());
+            var newDealership = await dealershipService.CreateDealership(dealershipDto);
+            var dealership = await dealershipRepository.AddEntity(newDealership);
             return CreatedAtAction("GetDealership", new { id = dealership.IdDealership }, dealership);
         }
 

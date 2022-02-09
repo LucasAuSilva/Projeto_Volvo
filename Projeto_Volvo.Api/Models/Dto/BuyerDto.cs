@@ -4,7 +4,7 @@ namespace Projeto_Volvo.Api.Models.Dto
 {
     public class BuyerDto : IDto<Buyer>
     {
-        public int IdBuyer { get; set; }
+        public int? IdBuyer { get; set; }
         public string? Name { get; set; }
         public string? Cpf { get; set; }
         public virtual AddressDto? Address { get; set; }

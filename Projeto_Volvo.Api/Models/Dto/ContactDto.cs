@@ -4,7 +4,7 @@ namespace Projeto_Volvo.Api.Models.Dto
 {
     public class ContactDto : IDto<Contact>
     {
-        public int IdContact { get; set; }
+        public int? IdContact { get; set; }
         public string? Phone { get; set; }
         public string? Fax { get; set; }
         public string? Email { get; set; }

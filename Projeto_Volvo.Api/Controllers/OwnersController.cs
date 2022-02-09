@@ -10,6 +10,7 @@ using Projeto_Volvo.Api.Contracts;
 using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
 using Projeto_Volvo.Api.Models.Dto;
+using Projeto_Volvo.Api.Service;
 
 namespace Projeto_Volvo.Api.Controllers
 {
@@ -18,10 +19,12 @@ namespace Projeto_Volvo.Api.Controllers
     public class OwnersController : ControllerBase
     {
         private readonly IOwnerRepository ownerRepository;
+        private readonly IOwnerService ownerService;
 
-        public OwnersController(IOwnerRepository ownerRepository)
+        public OwnersController(IOwnerRepository ownerRepository, IOwnerService ownerService)
         {
             this.ownerRepository = ownerRepository;
+            this.ownerService = ownerService;
         }
 
         // GET: api/Owners
@@ -77,7 +80,8 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Owner>> PostOwner(OwnerDto ownerDto)
         {
-            var owner = await ownerRepository.AddEntity(ownerDto.CreateEntity());
+            var newOwner = await ownerService.CreateOwner(ownerDto);
+            var owner = await ownerRepository.AddEntity(newOwner);
             return CreatedAtAction("GetOwner", new { id = owner.IdOwner }, owner);
         }
 
