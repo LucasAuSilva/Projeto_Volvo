@@ -45,7 +45,8 @@ namespace Projeto_Volvo.Api.Controllers
             }
         }
 
-        // GET: api/Workers/salary/5
+        // GET: api/Workers/5/salary
+        [HttpGet("{id}/salary")]
         public async Task<IActionResult> GetSalaryOnMonth(int id, [FromBody] DateDto dateDto)
         {
             var worker = await workerRepository.GetOneEntity(id);
