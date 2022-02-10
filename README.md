@@ -22,7 +22,7 @@ tratamento de exceções persistidos em um arquivo de log.
 
 ### Modelo Conceitual
 
-![Conceitual](./documents/Projeto_Volvo.png)
+![Conceitual](./Documents/Projeto_Volvo.png)
 
 ### Modelo Logico
 
