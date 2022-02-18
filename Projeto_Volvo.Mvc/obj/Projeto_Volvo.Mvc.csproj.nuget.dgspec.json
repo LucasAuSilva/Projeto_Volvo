@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Lucas\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj": {}
+    "C:\\Users\\lucassilva\\Documents\\Github_Repos\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Lucas\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj": {
+    "C:\\Users\\lucassilva\\Documents\\Github_Repos\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Lucas\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj",
+        "projectUniqueName": "C:\\Users\\lucassilva\\Documents\\Github_Repos\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj",
         "projectName": "Projeto_Volvo.Mvc",
-        "projectPath": "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Lucas\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj",
-        "packagesPath": "C:\\Users\\Patchelli\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Patchelli\\Documents\\PROG\\Volvo\\Lucas\\Projeto_Volvo\\Projeto_Volvo.Mvc\\obj\\",
+        "projectPath": "C:\\Users\\lucassilva\\Documents\\Github_Repos\\Projeto_Volvo\\Projeto_Volvo.Mvc\\Projeto_Volvo.Mvc.csproj",
+        "packagesPath": "C:\\Users\\lucassilva\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lucassilva\\Documents\\Github_Repos\\Projeto_Volvo\\Projeto_Volvo.Mvc\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Patchelli\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\lucassilva\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +57,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }
