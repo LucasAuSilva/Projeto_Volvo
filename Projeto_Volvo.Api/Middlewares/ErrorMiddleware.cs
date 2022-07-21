@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Nest;
+using Newtonsoft.Json;
 using Projeto_Volvo.Api.Exceptions;
 using Projeto_Volvo.Api.Models;
 using System.Net;
@@ -14,7 +15,7 @@ namespace Projeto_Volvo.Api.Middlewares
             this.next = next;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task Invoke(HttpContext context, IElasticClient elastic)
         {
             try
             {
@@ -22,18 +23,18 @@ namespace Projeto_Volvo.Api.Middlewares
             }
             catch (Exception ex)
             {
-                await HandleExceptionAsync(context, ex);
+                await HandleExceptionAsync(context, ex, elastic);
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception ex)
+        async private Task HandleExceptionAsync(HttpContext context, Exception ex, IElasticClient elastic)
         {
             //TODO: Gravar log de erro com o trace id
 
             ErrorResponseVm errorResponseVm;
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development" ||
-                Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Qa")
+            if (environment == "Development" || environment == "Qa")
             {
                 errorResponseVm = new ErrorResponseVm(HttpStatusCode.InternalServerError.ToString(),
                                                       $"{ex.Message} {ex?.InnerException?.Message}");
@@ -47,15 +48,24 @@ namespace Projeto_Volvo.Api.Middlewares
             }
 
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            LogAPI.RegisterLog(ex.Message, errorResponseVm.Errors[0].Logref, errorResponseVm.TraceId); ;
+
+            await this.RegisterLog(elastic, ex, environment);
+
             var result = JsonConvert.SerializeObject(errorResponseVm);
             context.Response.ContentType = "application/json";
-            return context.Response.WriteAsync(result);
+            await context.Response.WriteAsync(result);
         }
 
-        private void RegistraLog(string message)
+        async private Task RegisterLog(IElasticClient elastic, Exception ex, string Environment)
         {
-            throw new NotImplementedException();
+            var response = await elastic.IndexDocumentAsync(new ErrorLog(ex.Source, ex.StackTrace, ex.Message, Environment));
+            if (response.IsValid)
+            {
+                Console.WriteLine("Funcionou");
+                Console.WriteLine(response.Index);
+                return;
+            }
+            Console.WriteLine("Deu ruim");
         }
     }
 }

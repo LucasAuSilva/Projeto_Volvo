@@ -2,9 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using Projeto_Volvo.Api.Models;
 using Projeto_Volvo.Api.Contracts;
 using Projeto_Volvo.Api.Repository;
-using Microsoft.AspNetCore.Builder;
 using Projeto_Volvo.Api.Middlewares;
 using Projeto_Volvo.Api.Service;
+using Nest;
+using Projeto_Volvo.Api.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var connection = builder.Configuration["DbConnection"];
+
+builder.Services.AddSingleton<IElasticClient>(sp => 
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+
+    var settings = new ConnectionSettings(config["cloudId"], new Elasticsearch.Net.BasicAuthenticationCredentials(
+        "elastic", config["password"]))
+        .DefaultIndex("projeto-volvo")
+        .DefaultMappingFor<ErrorLog>(i => i.IndexName("logs"));
+
+    return new ElasticClient(settings);
+});
 
 // TODO: Achar um jeito melhor de fazer isso.
 // Repositorios da aplicacao.

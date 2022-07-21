@@ -32,6 +32,7 @@ namespace Projeto_Volvo.Api.Controllers
         public async Task<ActionResult<ICollection<Sale>>> GetSales()
         {
             var sale = await saleRepository.GetAllEntity();
+            throw new EntityException("Quebrou o comprador");
             return Ok(sale);
         }
 
@@ -39,15 +40,10 @@ namespace Projeto_Volvo.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Sale>> GetSale(int id)
         {
-            try
-            {
-                var sale = await saleRepository.GetOneEntity(id);
-                return sale;
-            }
-            catch (EntityException ex)
-            {
-                return NotFound(ex.Message);
-            }
+
+            var sale = await saleRepository.GetOneEntity(id);
+            return sale;
+
         }
 
         // PUT: api/Sales/5
